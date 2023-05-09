@@ -7,4 +7,28 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="fondo_login">#5d5ea4</color>
+    <color name="morado_medio">#5d5ea4</color>
+    <color name="morado_oscuro_claro">#6E70B8</color>
+    <color name="morado_oscuro">#3d3e7d</color>
+    <color name="blanco_azul">#e1e9f2</color>
+    <color name="blanco_naranja">#FF6F43</color>
+    <color name="gris_claro">#d9d9d9</color>
+    <color name="morado_saturado">#7848e7</color>
+    <color name="rosado_saturado">#e83769</color>
+    <color name="amarillo_saturado">#E7D248</color>
+    <color name="azul_saturado">#375DE8</color>
+    <color name="naranja_saturado">#EC883C</color>
+    <color name="azul_stage">#3f82c2</color>
+    <color name="verde_stage">#99c53d</color>
+    <color name="amarillo_stage">#f4bf29</color>
+    <color name="gris_stage">#989898</color>
+    <color name="block_app">#72000000</color>
+    <color name="background_logo">#1d224b</color>
+
+
+    <color name="rojo_corazon">#ea655b</color>
+    <color name="background_appn">#CFCED1</color>
+
 </resources>
