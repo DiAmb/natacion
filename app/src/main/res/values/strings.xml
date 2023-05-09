@@ -1,19 +1,10 @@
 <resources>
     <string name="app_name">natacion</string>
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="buscar">Buscar</string>
-    <string name="titulol">Titulo</string>
-    <string name="numero">Numero</string>
-    <string name="editar">Editar</string>
-    <string name="eliminar">Eliminar</string>
-    <string name="descripcion">Descripción</string>
-    <string name="audio">Audio</string>
-    <string name="imagen">Imagen</string>
+    <string name="correoHint">Escribe tu correo</string>
+    <string name="passHint">Escribe tu constraseña</string>
     <string name="correo">Ingresa tu correo:</string>
-    <string name="password">Ingresa tu constraseña:</string>
     <string name="registrar">Registrar</string>
     <string name="acceder">Acceder</string>
 
-
+    <string name="password">Ingresa tu contraseña:</string>
 </resources>
