@@ -9,7 +9,7 @@
         android:id="@+id/loadingFragment"
         android:name="com.example.natacion.vistas.loading.LoadingFragment"
         android:label="fragment_loading"
-        tools:layout="@layout/fragment_loading" >
+        tools:layout="@layout/fragment_loading">
         <action
             android:id="@+id/action_loadingFragment_to_fragmentLogin"
             app:destination="@id/fragmentLogin" />
@@ -21,7 +21,7 @@
         android:id="@+id/fragmentLogin"
         android:name="com.example.natacion.vistas.login.FragmentLogin"
         android:label="FragmentLogin"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_fragmentLogin_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -30,6 +30,68 @@
         android:id="@+id/homeFragment"
         android:name="com.example.natacion.vistas.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_verRegistrosFragment"
+            app:destination="@id/verRegistrosFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_crearRegistrosFragment"
+            app:destination="@id/crearRegistrosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/verRegistrosFragment"
+        android:name="com.example.natacion.vistas.registros.VerRegistrosFragment"
+        android:label="VerRegistrosFragment"
+        tools:layout="@layout/fragment_ver_registros">
+        <argument
+            android:name="numero"
+            app:argType="integer" />
+        <argument
+            android:name="titulo"
+            app:argType="string" />
+        <argument
+            android:name="descripcion"
+            app:argType="string" />
+        <argument
+            android:name="imagen"
+            app:argType="string" />
+        <argument
+            android:name="audio"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_verRegistrosFragment_to_editarRegistrosFragment"
+            app:destination="@id/editarRegistrosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/crearRegistrosFragment"
+        android:name="com.example.natacion.vistas.crear.CrearRegistrosFragment"
+        android:label="fragment_crear_registros"
+        tools:layout="@layout/fragment_crear_registros">
+        <action
+            android:id="@+id/action_crearRegistrosFragment_to_verRegistrosFragment"
+            app:destination="@id/verRegistrosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarRegistrosFragment"
+        android:name="com.example.natacion.vistas.editar.EditarRegistrosFragment"
+        android:label="fragment_editar_registros"
+        tools:layout="@layout/fragment_editar_registros">
+
+        <argument
+            android:name="numero"
+            app:argType="integer" />
+        <argument
+            android:name="titulo"
+            app:argType="string" />
+        <argument
+            android:name="descripcion"
+            app:argType="string" />
+        <argument
+            android:name="imagen"
+            app:argType="string" />
+        <argument
+            android:name="audio"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

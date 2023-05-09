@@ -4,41 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="registro"
             type="com.example.natacion.modelos.Registro" />
+
         <variable
             name="clickListener"
             type="com.example.natacion.vistas.home.HomeRegistroListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:onClick="@{()-> clickListener.onClick(registro)}"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_padding"
+        android:background="@drawable/button_morado_oscuro"
         android:padding="@dimen/layout_margin">
 
         <ImageView
             android:id="@+id/imgRegistro"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:background="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
             />
 
         <TextView
+            android:layout_marginStart="@dimen/layout_margin"
             android:id="@+id/txtTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_black"
             android:text="@{@string/titulo_registro(registro.numero,registro.titulo)}"
             app:layout_constraintStart_toEndOf="@+id/imgRegistro"
             app:layout_constraintTop_toTopOf="@+id/imgRegistro" />
 
         <TextView
             android:layout_width="0dp"
+            android:textColor="@color/white"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_lights"
+            android:text="@{registro.descripcion}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imgRegistro"
+            app:layout_constraintStart_toStartOf="@id/txtTitulo"
             app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

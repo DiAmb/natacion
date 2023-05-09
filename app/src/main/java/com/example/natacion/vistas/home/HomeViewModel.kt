@@ -10,9 +10,7 @@ import com.example.natacion.modelos.Registro
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.firestoreSettings
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
@@ -38,32 +36,85 @@ class HomeViewModel(application: Application) :
         getRegistros()
 
     }
-    fun getRegistros(){
+
+    fun getRegistros() {
         viewModelScope.launch {
             getRegistrosFirebase()
         }
     }
-    suspend fun getRegistrosFirebase(){
+
+    suspend fun getRegistrosFirebase() {
         val db = Firebase.firestore
 
         val user = auth.currentUser
         val registros = mutableListOf<Registro>()
 
-            val registrosRef = db.collection("registros")
-            registrosRef.get().addOnSuccessListener { documents ->
+        val registrosRef = db.collection("registros")
+        registrosRef.get().addOnSuccessListener { documents ->
 
-                for (document in documents) {
-                    val registro = document.toObject<Registro>()
-                    Log.d("TAG", "Registro: $registro")
-                    registros.add(registro)
-                }
-            }.addOnFailureListener { exception ->
-                Log.d("TAG", "Error al obtener registros: ", exception)
+            for (document in documents) {
+                val registro = document.toObject<Registro>()
+                Log.d("TAG", "Registro: $registro")
+                registros.add(registro)
             }
-            _registros.value = registros
-
-
-
+        }.addOnFailureListener { exception ->
+            Log.d("TAG", "Error al obtener registros: ", exception)
+        }.await()
+        _registros.value = registros
     }
+
+    fun getRegistrosByNumero(numero: Int) {
+        viewModelScope.launch {
+            getRegistrosByNumeroFirebase(numero)
+        }
+    }
+
+    fun getRegistrosByTitulo(titulo: String) {
+        viewModelScope.launch {
+            getRegistrosByTituloFirebase(titulo)
+        }
+    }
+
+
+    suspend fun getRegistrosByNumeroFirebase(value: Int) {
+        val db = Firebase.firestore
+
+        val user = auth.currentUser
+        val registros = mutableListOf<Registro>()
+
+        val registrosRef = db.collection("registros").whereEqualTo("numero", value)
+        registrosRef.get().addOnSuccessListener { documents ->
+
+            for (document in documents) {
+                val registro = document.toObject<Registro>()
+                Log.d("TAG", "Registro: $registro")
+                registros.add(registro)
+            }
+        }.addOnFailureListener { exception ->
+            Log.d("TAG", "Error al obtener registros: ", exception)
+        }.await()
+        _registros.value = registros
+    }
+
+    suspend fun getRegistrosByTituloFirebase(value: String) {
+        val db = Firebase.firestore
+
+        val user = auth.currentUser
+        val registros = mutableListOf<Registro>()
+
+        val registrosRef = db.collection("registros").whereEqualTo("titulo", value)
+        registrosRef.get().addOnSuccessListener { documents ->
+
+            for (document in documents) {
+                val registro = document.toObject<Registro>()
+                Log.d("TAG", "Registro: $registro")
+                registros.add(registro)
+            }
+        }.addOnFailureListener { exception ->
+            Log.d("TAG", "Error al obtener registros: ", exception)
+        }.await()
+        _registros.value = registros
+    }
+
 
 }

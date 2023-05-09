@@ -50,6 +50,7 @@ class HomeDiffCallback : DiffUtil.ItemCallback<Registro>() {
 }
 
 
-class HomeRegistroListener(val clickListener: (id: Int) -> Unit) {
-    fun onClick(registro: Registro) = registro.numero?.let { clickListener(it) }
+class HomeRegistroListener(val clickListener: (registro: Registro) -> Unit) {
+    fun onClick(registro: Registro) = clickListener(registro)
 }
+
