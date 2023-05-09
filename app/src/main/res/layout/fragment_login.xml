@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.natacion.vistas.login.LoginFragment">
+
+    <data>
+
+        <variable
+            name="loginViewModel"
+            type="com.example.natacion.vistas.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:contentDescription="@string/app_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1" />
+
+        <TextView
+            android:id="@+id/lblCorreo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textSize="20sp"
+            android:text="@string/correo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4" />
+
+        <EditText
+            android:id="@+id/txtCorreo"
+            android:layout_width="350sp"
+            android:layout_height="wrap_content"
+            android:autofillHints="emailAddress"
+            android:ems="50"
+            android:inputType="textEmailAddress"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/lblCorreo"
+            app:layout_constraintTop_toBottomOf="@+id/lblCorreo"
+            android:background="@color/button_background"
+            style="@style/button_styel"
+            tools:layout_editor_absoluteY="315dp" />
+
+        <TextView
+            android:id="@+id/lblPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp"
+            android:text="@string/password"
+            app:layout_constraintStart_toStartOf="@+id/txtCorreo"
+            app:layout_constraintTop_toBottomOf="@+id/txtCorreo" />
+
+        <EditText
+            android:id="@+id/txtPassword"
+            android:layout_width="350sp"
+            android:layout_height="wrap_content"
+            android:autofillHints="password"
+            android:ems="50"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/lblPassword"
+            app:layout_constraintTop_toBottomOf="@+id/lblPassword" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtPassword">
+
+            <Button
+                android:id="@+id/btnRegistrar"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:textSize="15sp"
+                android:text="@string/registrar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnAcceder"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="@string/acceder"
+                app:layout_constraintBottom_toBottomOf="@+id/btnRegistrar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnRegistrar"
+                app:layout_constraintTop_toTopOf="@+id/btnRegistrar" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
