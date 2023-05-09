@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.Observable
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.natacion.R
 import com.example.natacion.databinding.FragmentHomeBinding
@@ -31,6 +33,9 @@ class HomeFragment : Fragment() {
 
         val adapter = HomeAdapter(HomeRegistroListener { numero ->
 
+        })
+        homeViewModel.registros.observe(viewLifecycleOwner, Observer{
+            adapter.submitList(it)
         })
 
         binding.registros.adapter = adapter

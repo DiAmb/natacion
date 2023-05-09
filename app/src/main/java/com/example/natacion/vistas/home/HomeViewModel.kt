@@ -47,18 +47,20 @@ class HomeViewModel(application: Application) :
         val db = Firebase.firestore
 
         val user = auth.currentUser
-
+        val registros = mutableListOf<Registro>()
 
             val registrosRef = db.collection("registros")
             registrosRef.get().addOnSuccessListener { documents ->
+
                 for (document in documents) {
                     val registro = document.toObject<Registro>()
                     Log.d("TAG", "Registro: $registro")
+                    registros.add(registro)
                 }
             }.addOnFailureListener { exception ->
                 Log.d("TAG", "Error al obtener registros: ", exception)
             }
-
+            _registros.value = registros
 
 
 
