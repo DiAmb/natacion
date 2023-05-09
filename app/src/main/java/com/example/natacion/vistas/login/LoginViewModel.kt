@@ -30,7 +30,7 @@ class LoginViewModel(application: Application) :
     fun registrarUsuario(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener() { task ->
-                //HACER ALGO AL REGISTRAR CORRECTAMENTE
+                _loginSucess.value = true
             }
     }
 

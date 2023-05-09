@@ -65,7 +65,8 @@ class LoadingFragment : Fragment() {
     }
 
     private fun goToTitle() {
-
+        NavHostFragment.findNavController(this)
+            .navigate(R.id.action_loadingFragment_to_homeFragment)
     }
 
 }

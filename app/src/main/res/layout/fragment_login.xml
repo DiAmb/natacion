@@ -5,9 +5,9 @@
 
     <data>
 
-<!--        <variable-->
-<!--            name="loginViewModel"-->
-<!--            type="com.example.seniaslingo.vistas.login.LoginViewModel" />-->
+        <variable
+            name="loginViewModel"
+            type="com.example.natacion.vistas.login.LoginViewModel" />
     </data>
 
 
@@ -21,7 +21,7 @@
             android:id="@+id/logo"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:src="@mipmap/iconoNata"
+            android:src="@mipmap/logo_min"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +110,6 @@
 
             <Button
                 android:id="@+id/btnRegistrar"
-                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
@@ -124,10 +123,9 @@
 
             <Button
                 android:id="@+id/btnAcceder"
-                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_claro"
+                android:background="@drawable/button_morado_oscuro"
                 android:fontFamily="@font/roboto_black"
                 android:text="@string/acceder"
                 android:textColor="@color/white"

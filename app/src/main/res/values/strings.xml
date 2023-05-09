@@ -5,6 +5,8 @@
     <string name="correo">Ingresa tu correo:</string>
     <string name="registrar">Registrar</string>
     <string name="acceder">Acceder</string>
+    <string name="buscar">Buscar</string>
+    <string name="titulo_registro">%d. %s</string>
 
     <string name="password">Ingresa tu contraseña:</string>
 </resources>

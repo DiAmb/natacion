@@ -57,7 +57,7 @@ class FragmentLogin : Fragment() {
 
         loginViewModel.loginSucess.observe(viewLifecycleOwner, Observer { res ->
             if (res) {
-                goToTutorial()
+                goToHome()
             }
         })
 
@@ -70,8 +70,8 @@ class FragmentLogin : Fragment() {
         return binding.root
     }
 
-    private fun goToTutorial() {
-        
+    private fun goToHome() {
+        NavHostFragment.findNavController(this).navigate(R.id.action_fragmentLogin_to_homeFragment)
     }
 
 }
