@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "382984184624",
+    "project_id": "natacion-8706f",
+    "storage_bucket": "natacion-8706f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382984184624:android:a04d6f90c7453e93c59ef5",
+        "android_client_info": {
+          "package_name": "com.example.natacion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382984184624-fp1dugmqai80p1tveb0qo4sbiqqsj4t7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkP7DkUCe0cEiAuhrd46JFouA3jADCouw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382984184624-fp1dugmqai80p1tveb0qo4sbiqqsj4t7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
