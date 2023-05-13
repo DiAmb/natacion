@@ -43,7 +43,7 @@ class VerRegistrosFragment : Fragment() {
 
 
         binding.txtTitulo.text = numero.toString() + " " + titulo
-        binding.txtDescripcion.text = descripcion
+        binding.txtSubtitulo.text = descripcion
 
         binding.btnRegresar.setOnClickListener {
             NavHostFragment.findNavController(this).popBackStack()

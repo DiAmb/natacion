@@ -25,8 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background_logo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <Button
                 android:id="@+id/btnRegresar"
@@ -38,95 +38,142 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:visibility="invisible"
                 android:id="@+id/btnEliminar"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/delete_icon"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:visibility="invisible"
                 android:id="@+id/btnEditar"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/edit_icon"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btnEliminar"
                 app:layout_constraintTop_toTopOf="parent" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:src="@drawable/acuatrack"
+            android:background="@color/background_logo"/>
 
-        <TextView
-            android:id="@+id/txtTitulo"
+        <Button
+            android:id="@+id/btnRepetir"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_repeat"
+            tools:layout_editor_absoluteX="156dp"
+            tools:layout_editor_absoluteY="244dp"
+            app:layout_constraintStart_toStartOf="@id/imageView"
+            app:layout_constraintTop_toBottomOf="@id/imageView"/>
+
+        <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_play"
+            app:layout_constraintEnd_toEndOf="@id/imageView"
+            app:layout_constraintTop_toTopOf="@id/btnRepetir"
+            tools:layout_editor_absoluteX="181dp"
+            tools:layout_editor_absoluteY="244dp" />
+
+        <SeekBar
+            android:id="@+id/progresoAudio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
             android:layout_marginEnd="20dp"
-            android:text="TextView"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toTopOf="@id/txtTitulo"
+            app:layout_constraintTop_toBottomOf="@+id/btnRepetir"
+            android:backgroundTint="@color/background_logo"/>
 
         <TextView
-            android:id="@+id/txtDescripcion"
-            android:layout_width="match_parent"
+            android:id="@+id/timeCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/progresoAudio"
+            app:layout_constraintStart_toStartOf="@id/progresoAudio"/>
+
+        <TextView
+            android:id="@+id/timeLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5.00"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="@id/timeCurrent"
+            app:layout_constraintEnd_toEndOf="@id/progresoAudio"/>
+
+        <TextView
+            android:id="@+id/txtTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:text="Himno #"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progresoAudio" />
+
+        <TextView
+            android:id="@+id/txtSubtitulo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="172dp"
-            android:text="TextView"
+            android:text="@string/subtitulo"
             android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtTitulo"
-            app:layout_constraintVertical_bias="0.275" />
+            app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
 
-        <Button
-            android:id="@+id/btnRepetir"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="68dp"
-            android:background="@drawable/ic_repeat"
-            app:layout_constraintEnd_toStartOf="@+id/btnPlay"
-            app:layout_constraintHorizontal_bias="0.152"
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtDescripcion" />
+            app:layout_constraintTop_toBottomOf="@id/txtSubtitulo">
 
-        <Button
-            android:id="@+id/btnPlay"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="180dp"
-            android:background="@drawable/ic_play"
-            app:layout_constraintBottom_toBottomOf="@+id/btnRepetir"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="aa\naa\naa\naa\naa\naa\naa\n
+                aa\naa\naa\naa\naa\naa\naa\naa\naa\naa\naa"/>
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

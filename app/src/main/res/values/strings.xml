@@ -11,4 +11,6 @@
     <string name="password">Ingresa tu contraseña:</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="subtitulo">Tonalidad:\n Compás:\n Ritmo Sugerido:</string>
 </resources>
