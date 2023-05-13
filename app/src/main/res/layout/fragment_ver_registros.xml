@@ -101,10 +101,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+
             android:layout_marginTop="10dp"
+            android:backgroundTint="@color/background_logo"
             app:layout_constraintBottom_toTopOf="@id/txtTitulo"
             app:layout_constraintTop_toBottomOf="@+id/btnRepetir"
-            android:backgroundTint="@color/background_logo"/>
+            tools:layout_editor_absoluteX="20dp" />
 
         <TextView
             android:id="@+id/timeCurrent"

@@ -38,7 +38,7 @@
         <ImageView
             android:id="@+id/mostrarImagen"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="20dp"
@@ -69,7 +69,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="20dp"
-            android:text="Titulo"
+            android:text="@string/titulo1"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -85,7 +85,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="20dp"
-            android:text="Descripcion"
+            android:text="@string/descripcion1"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="20sp"
@@ -93,6 +93,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTitulo" />
+
 
         <EditText
             android:id="@+id/editTitulo"
@@ -103,7 +104,7 @@
             android:layout_marginEnd="20dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Titulo"
+            android:text="@string/titulo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +119,7 @@
             android:layout_marginEnd="20dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Descripcion"
+            android:text="@string/descripcion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
@@ -131,7 +132,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="20dp"
-            android:text="Audio"
+            android:text="@string/audio"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -145,11 +146,48 @@
             android:layout_width="73dp"
             android:layout_height="71dp"
             android:background="@drawable/ic_add_sound"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtAudio"
-            app:layout_constraintVertical_bias="0.105" />
+            app:layout_constraintTop_toBottomOf="@+id/btnPlay" />
+
+        <SeekBar
+            android:id="@+id/progresoAudio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/background_logo"
+            app:layout_constraintTop_toBottomOf="@id/txtAudio"
+        />
+        <TextView
+            android:id="@+id/timeCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/progresoAudio"
+            app:layout_constraintStart_toStartOf="@id/progresoAudio"/>
+        <TextView
+            android:id="@+id/timeLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginEnd="15sp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="@id/timeCurrent"
+            app:layout_constraintEnd_toEndOf="@id/progresoAudio"/>
+        <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_pause"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/progresoAudio"/>
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -158,10 +196,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="20dp"
+            android:layout_marginTop="35dp"
             android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnMusica"
+            app:layout_constraintTop_toBottomOf="@+id/progresoAudio"
+
             app:srcCompat="@drawable/ic_save" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
