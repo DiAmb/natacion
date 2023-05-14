@@ -63,7 +63,7 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
@@ -75,23 +75,14 @@
             android:background="@color/background_logo"/>
 
         <Button
-            android:id="@+id/btnRepetir"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/ic_repeat"
-            tools:layout_editor_absoluteX="156dp"
-            tools:layout_editor_absoluteY="244dp"
-            app:layout_constraintStart_toStartOf="@id/imageView"
-            app:layout_constraintTop_toBottomOf="@id/imageView"/>
-
-        <Button
             android:id="@+id/btnPlay"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/ic_play"
             app:layout_constraintEnd_toEndOf="@id/imageView"
-            app:layout_constraintTop_toTopOf="@id/btnRepetir"
+            app:layout_constraintTop_toBottomOf="@id/imageView"
+            app:layout_constraintStart_toStartOf="@id/imageView"
             tools:layout_editor_absoluteX="181dp"
             tools:layout_editor_absoluteY="244dp" />
 
@@ -101,11 +92,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/background_logo"
-            app:layout_constraintBottom_toTopOf="@id/txtTitulo"
-            app:layout_constraintTop_toBottomOf="@+id/btnRepetir"
+            app:layout_constraintBottom_toTopOf="@id/linearEncabezado"
+            app:layout_constraintTop_toBottomOf="@+id/btnPlay"
             tools:layout_editor_absoluteX="20dp" />
 
         <TextView
@@ -128,53 +118,62 @@
             app:layout_constraintTop_toTopOf="@id/timeCurrent"
             app:layout_constraintEnd_toEndOf="@id/progresoAudio"/>
 
-        <TextView
-            android:id="@+id/txtTitulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="20dp"
-            android:text="Himno #"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progresoAudio" />
 
-        <TextView
-            android:id="@+id/txtSubtitulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearEncabezado"
+            android:layout_width="match_parent"
+            android:layout_height="105dp"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="172dp"
-            android:text="@string/subtitulo"
-            android:textColor="@color/black"
-            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
+            app:layout_constraintTop_toBottomOf="@+id/progresoAudio"
+            android:background="@color/background_logo">
+
+            <TextView
+                android:id="@+id/txtTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/himno"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/txtSubtitulo"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="172dp"
+                android:text="@string/subtitulo"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
 
 
         <ScrollView
+            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="270dp"
+            android:layout_height="250dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtSubtitulo">
+            app:layout_constraintTop_toBottomOf="@id/linearEncabezado"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:text="aa\naa\naa\naa\naa\naa\naa\n
-                aa\naa\naa\naa\naa\naa\naa\naa\naa\naa\naa"/>
+                android:text="@string/contenido"/>
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
