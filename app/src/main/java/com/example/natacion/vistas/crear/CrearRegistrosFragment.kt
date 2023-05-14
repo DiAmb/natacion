@@ -105,6 +105,7 @@ class CrearRegistrosFragment : Fragment() {
                     binding.progresoAudio.max = mediaPlayer.duration
                     setupSeekBar()
                     }
+                    binding.btnPlay.setBackgroundResource(R.drawable.ic_pause)
                 } catch (e: IOException) {
                     Toast.makeText(requireContext(), "Error al establecer la fuente de audio", Toast.LENGTH_SHORT).show()
                 } catch (e: IllegalStateException) {
@@ -115,7 +116,7 @@ class CrearRegistrosFragment : Fragment() {
                     Toast.makeText(requireContext(), "Argumento ilegal pasado al reproductor multimedia", Toast.LENGTH_SHORT).show()
                 }
             }
-            binding.btnPlay.setBackgroundResource(R.drawable.ic_play)
+
         }else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
 
             val imageUri = data?.data
@@ -170,11 +171,11 @@ class CrearRegistrosFragment : Fragment() {
 
     private fun togglePlayback() {
         if (mediaPlayer.isPlaying) {
-            binding.btnPlay.setBackgroundResource(R.drawable.ic_pause)
+            binding.btnPlay.setBackgroundResource(R.drawable.ic_play)
             mediaPlayer.pause()
         } else {
             mediaPlayer.start()
-            binding.btnPlay.setBackgroundResource(R.drawable.ic_play)
+            binding.btnPlay.setBackgroundResource(R.drawable.ic_pause)
         }
     }
 }
