@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.natacion.database.Registro
 import com.example.natacion.databinding.RegistroBinding
-import com.example.natacion.modelos.Registro
 
 class HomeAdapter(val clickListener: HomeRegistroListener) :
     ListAdapter<Registro, HomeAdapter.ViewHolder>(HomeDiffCallback()) {

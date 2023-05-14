@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.natacion.R
+import com.example.natacion.database.DataDatabase
 import com.example.natacion.databinding.FragmentHomeBinding
 
 
@@ -26,8 +27,9 @@ class HomeFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         val application = requireNotNull(this.activity).application
+        val dataSource = DataDatabase.getInstance(application).dataDao
 
-        val viewModelFactory = HomeViewModelFactory(application)
+        val viewModelFactory = HomeViewModelFactory(dataSource,application)
 
         val homeViewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
         binding.lifecycleOwner = this
@@ -49,25 +51,7 @@ class HomeFragment : Fragment() {
 
         binding.registros.adapter = adapter
 
-        binding.btnBuscar.setOnClickListener {
-            val tipo = binding.spTipo.selectedItem.toString()
-            val busqueda = binding.txtBuscar.text.toString()
-            if (busqueda.isNullOrEmpty()) {
-                homeViewModel.getRegistros()
-            } else {
-                if (tipo == "Titulo") {
-                    homeViewModel.getRegistrosByTitulo(busqueda)
-                } else {
-                    try {
-                        homeViewModel.getRegistrosByNumero(busqueda.toInt())
-                    } catch (e: java.lang.Exception) {
-                        Toast.makeText(context, "Error en la busqueda", Toast.LENGTH_SHORT).show()
-                    }
 
-                }
-            }
-
-        }
 
         binding.btnCrear.setOnClickListener {
             NavHostFragment.findNavController(this)
