@@ -18,4 +18,6 @@
     <string name="titulo">Titulo</string>
     <string name="descripcion1">Descripcion</string>
     <string name="titulo1">Titulo</string>
+    <string name="himno">Himno #</string>
+    <string name="contenido">aa\naa\naa\naa\naa\naa\naa\n aa\naa\naa\naa\naa\naa\naa\naa\naa\naa\naa</string>
 </resources>
