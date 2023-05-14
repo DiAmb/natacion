@@ -54,6 +54,7 @@ class CrearRegistrosFragment : Fragment() {
 
         binding.btnRegresar.setOnClickListener {
             NavHostFragment.findNavController(this).popBackStack()
+
         }
         binding.btnMusica.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -135,23 +136,37 @@ class CrearRegistrosFragment : Fragment() {
         val handler = Handler()
         handler.postDelayed(object : Runnable {
             override fun run() {
-                val tiempoReproducido = mediaPlayer.currentPosition / 1000
-                val tiempoRestante = (mediaPlayer.duration - mediaPlayer.currentPosition) / 1000
-                val tiempoReproducidoStr = String.format("%02d:%02d", tiempoReproducido / 60, tiempoReproducido % 60)
-                val tiempoRestanteStr = String.format("%02d:%02d", tiempoRestante / 60, tiempoRestante % 60)
-                TiempoReproducidoAudio.text = tiempoReproducidoStr
-                TiempoRestanteAudio.text = tiempoRestanteStr
+                try {
+                     val tiempoReproducido = mediaPlayer.currentPosition / 1000
+                     val tiempoRestante = (mediaPlayer.duration - mediaPlayer.currentPosition) / 1000
+                     val tiempoReproducidoStr = String.format("%02d:%02d", tiempoReproducido / 60, tiempoReproducido % 60)
+                     val tiempoRestanteStr = String.format("%02d:%02d", tiempoRestante / 60, tiempoRestante % 60)
+                     TiempoReproducidoAudio.text = tiempoReproducidoStr
+                     TiempoRestanteAudio.text = tiempoRestanteStr
+                     binding.progresoAudio.progress = mediaPlayer.currentPosition
 
-                binding.progresoAudio.progress = mediaPlayer.currentPosition
-                handler.postDelayed(this, 1000)
+                    handler.postDelayed(this, 1000)
+                } catch (e: IllegalStateException) {
+                    handler.removeCallbacks(this)
+                }
             }
         }, 0)
     }
+
+
 
     override fun onDestroy() {
         super.onDestroy()
         mediaPlayer.release()
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mediaPlayer?.stop()
+    }
+
+
+
+
 
     private fun togglePlayback() {
         if (mediaPlayer.isPlaying) {
