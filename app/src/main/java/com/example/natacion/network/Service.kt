@@ -19,8 +19,17 @@ interface DataService {
     @GET("registros/")
     suspend fun getRegistros(): List<Registro>
 
+    @GET("registros/")
+    suspend fun getRegistrosByNumero(@Query("numero") numero:Int): List<Registro>
+
+    @GET("registros/")
+    suspend fun getRegistrosByTitulo(@Query("titulo") numero:String): List<Registro>
+
     @POST("registros/")
     suspend fun insertRegistro(@Body registro: Registro): Response<Registro>
+
+    @PUT("registros/")
+    suspend fun updateRegistro(@Body registro: Registro): Response<Registro>
 
     @POST("register/")
     suspend fun registrarUsuario(@Body usuario: Usuario): Response<UsuarioResponse>

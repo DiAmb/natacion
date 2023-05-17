@@ -35,6 +35,7 @@ class VerRegistrosFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.verRegistrosViewModel = verRegistrosViewModel
 
+        var id = arguments?.getInt("id")
         var numero = arguments?.getInt("numero")
         var titulo = arguments?.getString("titulo")
         var subtitulo = arguments?.getString("subtitulo")
@@ -53,10 +54,15 @@ class VerRegistrosFragment : Fragment() {
 
         binding.btnEditar.setOnClickListener {
             var bundle = Bundle()
+            if (id != null) {
+                bundle.putInt("id", id)
+            }
             if (numero != null) {
                 bundle.putInt("numero", numero)
             }
+
             bundle.putString("titulo", titulo)
+            bundle.putString("subtitulo", subtitulo)
             bundle.putString("descripcion", descripcion)
             bundle.putString("imagen", imagen)
             bundle.putString("audio", audio)

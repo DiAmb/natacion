@@ -31,17 +31,42 @@ class HomeViewModel(dataSource: DataDao, application: Application) :
         getRegistros()
     }
 
-    fun getRegistros(){
+    fun getRegistros() {
         viewModelScope.launch {
             registrosRepository.refreshRegistros()
             _registros.value = getRegistrosFromDatabase()
         }
     }
 
-    private suspend fun getRegistrosFromDatabase():List<Registro>{
+    fun getAllRegistros() {
+        viewModelScope.launch {
+            _registros.value = getRegistrosFromDatabase()
+        }
+    }
+
+    fun getRegistrosByNumero(numero: Int) {
+        viewModelScope.launch {
+            _registros.value = getRegistrosFromDatabaseByNumero(numero)
+        }
+    }
+
+    fun getRegistrosByTitulo(titulo: String) {
+        viewModelScope.launch {
+            _registros.value = getRegistrosFromDatabaseByTitulo(titulo)
+        }
+    }
+
+    private suspend fun getRegistrosFromDatabase(): List<Registro> {
         return database.getRegistros()
     }
 
+    private suspend fun getRegistrosFromDatabaseByTitulo(titulo: String): List<Registro> {
+        return database.getRegistrosByTitulo(titulo)
+    }
+
+    private suspend fun getRegistrosFromDatabaseByNumero(numero: Int): List<Registro> {
+        return database.getRegistrosByNumero(numero)
+    }
 
 
 }
