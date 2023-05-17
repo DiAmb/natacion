@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">natacion</string>
+    <string name="app_name">Himnario Virtual</string>
     <string name="correoHint">Escribe tu correo</string>
     <string name="passHint">Escribe tu constraseña</string>
     <string name="correo">Ingresa tu correo:</string>

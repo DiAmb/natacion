@@ -44,7 +44,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/delete_icon"
+                android:background="@drawable/himnario_virtual"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -68,8 +68,60 @@
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+<<<<<<< HEAD
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
+=======
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:src="@drawable/himnario_virtual"
+            android:background="@color/background_logo"/>
+
+        <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_play"
+            app:layout_constraintEnd_toEndOf="@id/imageView"
+            app:layout_constraintTop_toBottomOf="@id/imageView"
+            app:layout_constraintStart_toStartOf="@id/imageView"
+            tools:layout_editor_absoluteX="181dp"
+            tools:layout_editor_absoluteY="244dp" />
+
+        <SeekBar
+            android:id="@+id/progresoAudio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/background_logo"
+            app:layout_constraintBottom_toTopOf="@id/linearEncabezado"
+            app:layout_constraintTop_toBottomOf="@+id/btnPlay"
+            tools:layout_editor_absoluteX="20dp" />
+
+        <TextView
+            android:id="@+id/timeCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/progresoAudio"
+            app:layout_constraintStart_toStartOf="@id/progresoAudio"/>
+
+        <TextView
+            android:id="@+id/timeLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5.00"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="@id/timeCurrent"
+            app:layout_constraintEnd_toEndOf="@id/progresoAudio"/>
+
+
+>>>>>>> 0c828007cb4a21d64b05f051f5948d0fe08a5409
         <LinearLayout
             android:id="@+id/linearEncabezado"
             android:layout_width="match_parent"
