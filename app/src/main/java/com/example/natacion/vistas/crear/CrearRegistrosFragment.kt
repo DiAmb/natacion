@@ -53,6 +53,7 @@ class CrearRegistrosFragment : Fragment() {
             NavHostFragment.findNavController(this).popBackStack()
 
         }
+
 //        binding.btnMusica.setOnClickListener {
 //            val intent = Intent(Intent.ACTION_GET_CONTENT)
 //            intent.type = "audio/*"
@@ -81,12 +82,12 @@ class CrearRegistrosFragment : Fragment() {
         binding.btnGuardar.setOnClickListener {
             val registro = Registro(
                 0,
-                1,
+                binding.editNumero.text.toString().toInt(),
                 binding.editTitulo.text.toString(),
                 binding.editSubtitulo.text.toString(),
                 binding.editDescripcion.text.toString(),
-                "",
-                ""
+                binding.editImagen.text.toString(),
+                binding.editAudio.text.toString()
             )
             crearRegistrosViewModel.insertRegistro(
                 registro

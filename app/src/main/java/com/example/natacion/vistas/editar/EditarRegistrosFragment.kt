@@ -37,12 +37,17 @@ class EditarRegistrosFragment : Fragment() {
         var numero = arguments?.getInt("numero")
         var titulo = arguments?.getString("titulo")
         var descripcion = arguments?.getString("descripcion")
+        var subtitulo = arguments?.getString("subtitulo")
         var imagen = arguments?.getString("imagen")
         var audio = arguments?.getString("audio")
 
 
         binding.editTitulo.setText(titulo)
         binding.editDescripcion.setText(descripcion)
+        binding.editAudio.setText(audio)
+        binding.editImagen.setText(imagen)
+        binding.editSubtitulo.setText(subtitulo)
+        binding.editNumero.setText(numero.toString())
 
         binding.btnRegresar.setOnClickListener {
             NavHostFragment.findNavController(this).popBackStack()
@@ -51,12 +56,12 @@ class EditarRegistrosFragment : Fragment() {
         binding.btnGuardar.setOnClickListener {
             val registro = Registro(
                 id,
-                numero,
+                binding.editNumero.text.toString().toInt(),
                 binding.editTitulo.text.toString(),
                 binding.editSubtitulo.text.toString(),
                 binding.editDescripcion.text.toString(),
-                "",
-                ""
+                binding.editImagen.text.toString(),
+                binding.editAudio.text.toString()
             )
             editarRegistrosViewModel.updateRegistro(
                 registro
@@ -71,8 +76,8 @@ class EditarRegistrosFragment : Fragment() {
                 bundle.putString("titulo", binding.editTitulo.text.toString())
                 bundle.putString("subtitulo", binding.editSubtitulo.text.toString())
                 bundle.putString("descripcion", binding.editDescripcion.text.toString())
-                bundle.putString("imagen", "")
-                bundle.putString("audio", "")
+                bundle.putString("imagen",binding.editImagen.text.toString())
+                bundle.putString("audio", binding.editAudio.text.toString())
                 NavHostFragment.findNavController(this)
                     .navigate(R.id.action_editarRegistrosFragment_to_verRegistrosFragment, bundle)
             }
