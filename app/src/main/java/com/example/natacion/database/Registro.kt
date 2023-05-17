@@ -3,26 +3,40 @@ package com.example.natacion.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "Registro")
 data class Registro(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "numero")
-    var numero:Int = 0,
+    @SerializedName("numero")
+    @Expose
+    var numero: Int? = null,
 
     @ColumnInfo(name = "titulo")
-    var titulo:String ="",
+    @SerializedName("titulo")
+    @Expose
+    var titulo: String? = null,
 
     @ColumnInfo(name = "subtitulo")
-    var subtitulo:String ="",
+    @SerializedName("subtitulo")
+    @Expose
+    var subtitulo: String? = null,
 
     @ColumnInfo(name = "descripcion")
-    var descripcion:String ="",
+    @SerializedName("descripcion")
+    @Expose
+    var descripcion: String? = null,
 
     @ColumnInfo(name = "imagen")
-    var imagen:String ="",
+    @SerializedName("imagen")
+    @Expose
+    var imagen: String? = null,
 
     @ColumnInfo(name = "audio")
-    var audio:String ="",
+    @SerializedName("audio")
+    @Expose
+    var audio: String? = null,
 )

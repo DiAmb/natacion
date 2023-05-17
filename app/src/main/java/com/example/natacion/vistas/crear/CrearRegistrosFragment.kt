@@ -5,7 +5,6 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,12 +17,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.natacion.R
+import com.example.natacion.database.DataDatabase
+import com.example.natacion.database.Registro
 import com.example.natacion.databinding.FragmentCrearRegistrosBinding
-import com.example.natacion.databinding.FragmentVerRegistrosBinding
-import com.example.natacion.vistas.registros.VerRegistrosViewModel
-import com.example.natacion.vistas.registros.VerRegistrosViewModelFactory
+import com.example.natacion.network.NetworkRegistro
+import com.google.gson.JsonObject
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import java.io.IOException
-import kotlin.math.log
 
 class CrearRegistrosFragment : Fragment() {
     private val REQUEST_IMAGE = 2
@@ -42,8 +43,9 @@ class CrearRegistrosFragment : Fragment() {
             inflater, R.layout.fragment_crear_registros, container, false
         )
         val application = requireNotNull(this.activity).application
+        val dataSource = DataDatabase.getInstance(application).dataDao
 
-        val viewModelFactory = CrearRegistrosViewModelFactory(application)
+        val viewModelFactory = CrearRegistrosViewModelFactory(dataSource, application)
 
         val crearRegistrosViewModel =
             ViewModelProvider(
@@ -81,43 +83,78 @@ class CrearRegistrosFragment : Fragment() {
             startActivityForResult(intent, REQUEST_IMAGE)
         }
 
+        binding.btnGuardar.setOnClickListener {
+            val json = JsonObject()
+            json.addProperty("titulo", binding.txtTitulo.text.toString())
+            json.addProperty("subtitulo", binding.txtSubtitulo.text.toString())
+            json.addProperty("descripcion", binding.txtDescripcion.text.toString())
+            json.addProperty("imagen", "")
+            json.addProperty("audio", "")
+            val requestBody: RequestBody =
+                RequestBody.create(MediaType.parse("application/json"), json.toString())
+            crearRegistrosViewModel.insertRegistro(
+                requestBody
+            )
+        }
+
 
 
 
 
         return binding.root
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             val audioUri = data?.data
             if (audioUri != null) {
                 try {
-                    if(mediaPlayer.isPlaying){
+                    if (mediaPlayer.isPlaying) {
                         mediaPlayer.stop()
                     }
                     // Código para la API
                     mediaPlayer.reset()
-                    mediaPlayer.setDataSource(requireContext(), audioUri) // Configurar la fuente de audio en el objeto MediaPlayer
+                    mediaPlayer.setDataSource(
+                        requireContext(),
+                        audioUri
+                    ) // Configurar la fuente de audio en el objeto MediaPlayer
                     mediaPlayer.prepareAsync()
-                    mediaPlayer.setOnPreparedListener { mediaPlayer.start()
-                    binding.btnPlay.visibility = View.VISIBLE
-                    binding.progresoAudio.max = mediaPlayer.duration
-                    setupSeekBar()
+                    mediaPlayer.setOnPreparedListener {
+                        mediaPlayer.start()
+                        binding.btnPlay.visibility = View.VISIBLE
+                        binding.progresoAudio.max = mediaPlayer.duration
+                        setupSeekBar()
                     }
                     binding.btnPlay.setBackgroundResource(R.drawable.ic_pause)
                 } catch (e: IOException) {
-                    Toast.makeText(requireContext(), "Error al establecer la fuente de audio", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Error al establecer la fuente de audio",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } catch (e: IllegalStateException) {
-                    Toast.makeText(requireContext(), "El reproductor multimedia no se encuentra en el estado adecuado", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "El reproductor multimedia no se encuentra en el estado adecuado",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } catch (e: SecurityException) {
-                    Toast.makeText(requireContext(), "Permiso denegado para acceder a la fuente de audio", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Permiso denegado para acceder a la fuente de audio",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } catch (e: IllegalArgumentException) {
-                    Toast.makeText(requireContext(), "Argumento ilegal pasado al reproductor multimedia", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Argumento ilegal pasado al reproductor multimedia",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
-        }else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
+        } else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
 
             val imageUri = data?.data
             if (imageUri != null) {
@@ -125,12 +162,15 @@ class CrearRegistrosFragment : Fragment() {
                     binding.mostrarImagen.setImageURI(imageUri)
                     // Código para la API
                 } catch (e: IOException) {
-                    Toast.makeText(requireContext(), "Error al establecer la fuente de imagen", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Error al establecer la fuente de imagen",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
     }
-
 
 
     private fun setupSeekBar() {
@@ -138,13 +178,15 @@ class CrearRegistrosFragment : Fragment() {
         handler.postDelayed(object : Runnable {
             override fun run() {
                 try {
-                     val tiempoReproducido = mediaPlayer.currentPosition / 1000
-                     val tiempoRestante = (mediaPlayer.duration - mediaPlayer.currentPosition) / 1000
-                     val tiempoReproducidoStr = String.format("%02d:%02d", tiempoReproducido / 60, tiempoReproducido % 60)
-                     val tiempoRestanteStr = String.format("%02d:%02d", tiempoRestante / 60, tiempoRestante % 60)
-                     TiempoReproducidoAudio.text = tiempoReproducidoStr
-                     TiempoRestanteAudio.text = tiempoRestanteStr
-                     binding.progresoAudio.progress = mediaPlayer.currentPosition
+                    val tiempoReproducido = mediaPlayer.currentPosition / 1000
+                    val tiempoRestante = (mediaPlayer.duration - mediaPlayer.currentPosition) / 1000
+                    val tiempoReproducidoStr =
+                        String.format("%02d:%02d", tiempoReproducido / 60, tiempoReproducido % 60)
+                    val tiempoRestanteStr =
+                        String.format("%02d:%02d", tiempoRestante / 60, tiempoRestante % 60)
+                    TiempoReproducidoAudio.text = tiempoReproducidoStr
+                    TiempoRestanteAudio.text = tiempoRestanteStr
+                    binding.progresoAudio.progress = mediaPlayer.currentPosition
 
                     handler.postDelayed(this, 1000)
                 } catch (e: IllegalStateException) {
@@ -155,18 +197,15 @@ class CrearRegistrosFragment : Fragment() {
     }
 
 
-
     override fun onDestroy() {
         super.onDestroy()
         mediaPlayer.release()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         mediaPlayer?.stop()
     }
-
-
-
 
 
     private fun togglePlayback() {

@@ -1,16 +1,18 @@
 package com.example.natacion.network
-import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
-data class NetworkPostContainer(val posts: List<NetworkPost>)
+import com.google.gson.annotations.SerializedName
 
-
-@JsonClass(generateAdapter = true)
-data class NetworkPost(
-    var numero:Int,
-    var titulo:String,
-    var subtitulo:String ,
-    var descripcion:String,
-    var imagen:String,
-    var audio:String,
+data class NetworkRegistro(
+    @SerializedName("numero")
+    var numero:Int?,
+    @SerializedName("titulo")
+    var titulo:String?,
+    @SerializedName("subtitulo")
+    var subtitulo:String?,
+    @SerializedName("descripcion")
+    var descripcion:String?,
+    @SerializedName("imagen")
+    var imagen:String?,
+    @SerializedName("audio")
+    var audio:String?,
 )

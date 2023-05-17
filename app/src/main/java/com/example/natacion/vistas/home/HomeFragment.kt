@@ -39,6 +39,7 @@ class HomeFragment : Fragment() {
             var bundle = Bundle()
             registro.numero?.let { bundle.putInt("numero", it) }
             bundle.putString("titulo", registro.titulo)
+            bundle.putString("subtitulo", registro.subtitulo)
             bundle.putString("descripcion", registro.descripcion)
             bundle.putString("imagen", registro.imagen)
             bundle.putString("audio", registro.audio)

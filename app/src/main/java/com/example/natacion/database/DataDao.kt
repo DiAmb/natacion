@@ -14,4 +14,7 @@ interface DataDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(registros: List<Registro>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertRegistro(registro: Registro)
 }

@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_verRegistrosFragment_to_editarRegistrosFragment"
             app:destination="@id/editarRegistrosFragment" />
+        <argument
+            android:name="subtitulo"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/crearRegistrosFragment"
