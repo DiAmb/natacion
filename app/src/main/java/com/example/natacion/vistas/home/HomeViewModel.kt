@@ -31,7 +31,7 @@ class HomeViewModel(dataSource: DataDao, application: Application) :
         getRegistros()
     }
 
-    private fun getRegistros(){
+    fun getRegistros(){
         viewModelScope.launch {
             registrosRepository.refreshRegistros()
             _registros.value = getRegistrosFromDatabase()

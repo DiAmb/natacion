@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.natacion.R
+import com.example.natacion.database.DataDatabase
 import com.example.natacion.databinding.FragmentLoadingBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -21,9 +22,6 @@ import kotlinx.coroutines.launch
 
 class LoadingFragment : Fragment() {
 
-    private lateinit var auth: FirebaseAuth
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,8 +30,9 @@ class LoadingFragment : Fragment() {
             inflater, R.layout.fragment_loading, container, false
         )
         val application = requireNotNull(this.activity).application
+        val dataSource = DataDatabase.getInstance(application).dataDao
 
-        val viewModelFactory = LoadingViewModelFactory(application)
+        val viewModelFactory = LoadingViewModelFactory(dataSource, application)
 
         val loadingViewModel =
             ViewModelProvider(
@@ -42,12 +41,9 @@ class LoadingFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.loadingViewModel = loadingViewModel
 
-        auth = Firebase.auth
-        val currentUser = auth.currentUser
-
         GlobalScope.launch(Dispatchers.Main) {
+            val currentUser = loadingViewModel.hasData()
             delay(1000)
-
             if (currentUser != null) {
                 goToTitle()
             } else {

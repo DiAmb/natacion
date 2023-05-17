@@ -14,22 +14,17 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.natacion.R
 import com.example.natacion.database.DataDatabase
 import com.example.natacion.database.Registro
 import com.example.natacion.databinding.FragmentCrearRegistrosBinding
-import com.example.natacion.network.NetworkRegistro
-import com.google.gson.JsonObject
-import okhttp3.MediaType
-import okhttp3.RequestBody
 import java.io.IOException
 
 class CrearRegistrosFragment : Fragment() {
     private val REQUEST_IMAGE = 2
-
-
     private lateinit var binding: FragmentCrearRegistrosBinding
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var TiempoRestanteAudio: TextView
@@ -84,21 +79,25 @@ class CrearRegistrosFragment : Fragment() {
         }
 
         binding.btnGuardar.setOnClickListener {
-            val json = JsonObject()
-            json.addProperty("titulo", binding.txtTitulo.text.toString())
-            json.addProperty("subtitulo", binding.txtSubtitulo.text.toString())
-            json.addProperty("descripcion", binding.txtDescripcion.text.toString())
-            json.addProperty("imagen", "")
-            json.addProperty("audio", "")
-            val requestBody: RequestBody =
-                RequestBody.create(MediaType.parse("application/json"), json.toString())
+            val registro = Registro(
+                0,
+                1,
+                binding.editTitulo.text.toString(),
+                binding.editSubtitulo.text.toString(),
+                binding.editDescripcion.text.toString(),
+                "",
+                ""
+            )
             crearRegistrosViewModel.insertRegistro(
-                requestBody
+                registro
             )
         }
 
-
-
+        crearRegistrosViewModel.backHome.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                NavHostFragment.findNavController(this).popBackStack()
+            }
+        })
 
 
         return binding.root

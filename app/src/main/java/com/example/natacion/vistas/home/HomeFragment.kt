@@ -18,6 +18,22 @@ import com.example.natacion.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
+    private val homeViewModel: HomeViewModel by lazy {
+        val activity = requireNotNull(this.activity) {
+            "You can only access the viewModel after onActivityCreated()"
+        }
+        val application = requireNotNull(this.activity).application
+        val dataSource = DataDatabase.getInstance(application).dataDao
+        ViewModelProvider(this, HomeViewModelFactory(dataSource, application))
+            .get(HomeViewModel::class.java)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        homeViewModel.getRegistros()
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,12 +42,6 @@ class HomeFragment : Fragment() {
         val binding: FragmentHomeBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
-        val application = requireNotNull(this.activity).application
-        val dataSource = DataDatabase.getInstance(application).dataDao
-
-        val viewModelFactory = HomeViewModelFactory(dataSource,application)
-
-        val homeViewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
         binding.lifecycleOwner = this
         binding.homeViewModel = homeViewModel
 
