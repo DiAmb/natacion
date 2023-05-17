@@ -20,4 +20,7 @@
     <string name="titulo1">Titulo</string>
     <string name="himno">Himno #</string>
     <string name="contenido">aa\naa\naa\naa\naa\naa\naa\n aa\naa\naa\naa\naa\naa\naa\naa\naa\naa\naa</string>
+    <string name="numero_de_himno">Número de Himno</string>
+    <string name="url_de_imagen">URL de imagen</string>
+    <string name="url_de_audio">URL de audio</string>
 </resources>

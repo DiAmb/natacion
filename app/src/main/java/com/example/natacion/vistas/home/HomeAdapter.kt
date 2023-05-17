@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.natacion.database.Registro
 import com.example.natacion.databinding.RegistroBinding
 
@@ -26,6 +27,8 @@ class HomeAdapter(val clickListener: HomeRegistroListener) :
             binding.registro = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
+            var url = item.imagen
+            Glide.with(binding.root).load(url).into(binding.imgRegistro);
         }
 
         companion object {

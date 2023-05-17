@@ -9,8 +9,10 @@ data class Usuario(
     @PrimaryKey()
     @ColumnInfo(name = "usuario")
     var usuario: String = "",
+
     @ColumnInfo(name = "password")
     var password: String = "",
+
     @ColumnInfo(name = "tipo")
     var tipo: Boolean = false,
 )

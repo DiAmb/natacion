@@ -5,17 +5,22 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.example.natacion.database.DataDao
+import com.example.natacion.database.Usuario
+import com.example.natacion.network.RegistroNetwork
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
 
-class LoginViewModel(application: Application) :
+class LoginViewModel(dataSource: DataDao, application: Application) :
     AndroidViewModel(application) {
-
-    private lateinit var auth: FirebaseAuth
 
     private val _loginSucess = MutableLiveData<Boolean>()
     val loginSucess: LiveData<Boolean> get() = _loginSucess
@@ -23,26 +28,53 @@ class LoginViewModel(application: Application) :
     private val _loginFailed = MutableLiveData<Boolean>()
     val loginFailed: LiveData<Boolean> get() = _loginFailed
 
+
+    private val database = dataSource
+
     init {
-        auth = Firebase.auth
+        _loginFailed.value = false
+        _loginSucess.value = false
     }
 
     fun registrarUsuario(email: String, password: String) {
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener() { task ->
+        viewModelScope.launch {
+            val usuarioResponse =
+                RegistroNetwork.registros.registrarUsuario(Usuario(email, password)).body()
+            if (usuarioResponse != null) {
+                val usuario = Usuario(
+                    usuarioResponse.usuario,
+                    usuarioResponse.password,
+                    usuarioResponse.tipo == 1
+                )
+                database.deleteAllUsuario()
+                database.inserUsuario(usuario)
                 _loginSucess.value = true
+            } else {
+                _loginFailed.value = true
             }
+
+
+        }
     }
 
     fun accederUsuario(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener() { task ->
-                if (task.isSuccessful) {
-                    _loginSucess.value = true
-                } else {
-                    _loginFailed.value = true
-                }
+        viewModelScope.launch {
+            val usuarioResponse =
+                RegistroNetwork.registros.loginUsuario(Usuario(email, password)).body()
+
+            if (usuarioResponse != null) {
+                val usuario = Usuario(
+                    usuarioResponse.usuario,
+                    usuarioResponse.password,
+                    usuarioResponse.tipo == 1
+                )
+                database.deleteAllUsuario()
+                database.inserUsuario(usuario)
+                _loginSucess.value = true
+            } else {
+                _loginFailed.value = true
             }
+        }
     }
 
 

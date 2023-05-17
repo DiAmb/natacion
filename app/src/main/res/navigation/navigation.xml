@@ -64,6 +64,9 @@
         <argument
             android:name="subtitulo"
             app:argType="string" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/crearRegistrosFragment"
@@ -94,6 +97,17 @@
             app:argType="string" />
         <argument
             android:name="audio"
+            app:argType="string" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_editarRegistrosFragment_to_verRegistrosFragment"
+            app:destination="@id/verRegistrosFragment"
+            app:popUpTo="@id/verRegistrosFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="subtitulo"
             app:argType="string" />
     </fragment>
 

@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.natacion.R
+import com.example.natacion.database.DataDatabase
 import com.example.natacion.databinding.FragmentLoginBinding
 
 
@@ -22,8 +23,9 @@ class FragmentLogin : Fragment() {
             inflater, R.layout.fragment_login, container, false
         )
         val application = requireNotNull(this.activity).application
+        val dataSource = DataDatabase.getInstance(application).dataDao
+        val viewModelFactory = LoginViewModelFactory(dataSource, application)
 
-        val viewModelFactory = LoginViewModelFactory(application)
 
         val loginViewModel =
             ViewModelProvider(
@@ -38,8 +40,12 @@ class FragmentLogin : Fragment() {
 
             if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
                 loginViewModel.registrarUsuario(email, password)
-            }else{
-                Toast.makeText(context, "Ingrese todos los campos para poder continuar.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    context,
+                    "Ingrese todos los campos para poder continuar.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
         }
@@ -49,8 +55,12 @@ class FragmentLogin : Fragment() {
             var password: String = binding.txtPassword.text.toString()
             if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
                 loginViewModel.accederUsuario(email, password)
-            }else{
-                Toast.makeText(context, "Ingrese todos los campos para poder continuar.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    context,
+                    "Ingrese todos los campos para poder continuar.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
         }
