@@ -12,10 +12,14 @@
         tools:layout="@layout/fragment_loading">
         <action
             android:id="@+id/action_loadingFragment_to_fragmentLogin"
-            app:destination="@id/fragmentLogin" />
+            app:destination="@id/fragmentLogin"
+            app:popUpTo="@id/loadingFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_loadingFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/loadingFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/fragmentLogin"
@@ -24,7 +28,9 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_fragmentLogin_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -75,7 +81,8 @@
         tools:layout="@layout/fragment_crear_registros">
         <action
             android:id="@+id/action_crearRegistrosFragment_to_verRegistrosFragment"
-            app:destination="@id/verRegistrosFragment" />
+            app:destination="@id/verRegistrosFragment"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/editarRegistrosFragment"
