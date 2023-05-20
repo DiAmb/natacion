@@ -125,7 +125,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/himno"
                             android:textAlignment="center"
-                            android:textColor="@color/material_dynamic_primary100" />
+                            android:textColor="@android:color/white" />
 
                         <TextView
                             android:id="@+id/txtSubtitulo"
@@ -134,7 +134,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/subtitulo"
                             android:textAlignment="center"
-                            android:textColor="@color/material_dynamic_primary100" />
+                            android:textColor="@android:color/white" />
                     </LinearLayout>
 
                     <TextView

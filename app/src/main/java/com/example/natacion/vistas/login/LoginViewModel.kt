@@ -36,16 +36,19 @@ class LoginViewModel(dataSource: DataDao, application: Application) :
         _loginSucess.value = false
     }
 
-    fun registrarUsuario(email: String, password: String) {
+    fun registrarUsuario(email: String, password: String, nombres: String, apellidos: String) {
         viewModelScope.launch {
-            val usuarioResponse =
-                RegistroNetwork.registros.registrarUsuario(Usuario(email, password)).body()
-            if (usuarioResponse != null) {
-                val usuario = Usuario(
-                    usuarioResponse.usuario,
-                    usuarioResponse.password,
-                    usuarioResponse.tipo == 1
-                )
+            val usuario =
+                RegistroNetwork.registros.registrarUsuario(
+                    Usuario(
+                        email,
+                        password,
+                        0,
+                        nombres,
+                        apellidos
+                    )
+                ).body()
+            if (usuario != null) {
                 database.deleteAllUsuario()
                 database.inserUsuario(usuario)
                 _loginSucess.value = true
@@ -63,13 +66,8 @@ class LoginViewModel(dataSource: DataDao, application: Application) :
                 RegistroNetwork.registros.loginUsuario(Usuario(email, password)).body()
 
             if (usuarioResponse != null) {
-                val usuario = Usuario(
-                    usuarioResponse.usuario,
-                    usuarioResponse.password,
-                    usuarioResponse.tipo == 1
-                )
                 database.deleteAllUsuario()
-                database.inserUsuario(usuario)
+                database.inserUsuario(usuarioResponse)
                 _loginSucess.value = true
             } else {
                 _loginFailed.value = true

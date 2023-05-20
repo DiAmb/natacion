@@ -39,7 +39,7 @@ class FragmentLogin : Fragment() {
             var password: String = binding.txtPassword.text.toString()
 
             if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
-                loginViewModel.registrarUsuario(email, password)
+                loginViewModel.registrarUsuario(email, password, "Nombre Test", "Apellidos Test")
             } else {
                 Toast.makeText(
                     context,

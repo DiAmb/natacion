@@ -32,10 +32,10 @@ interface DataService {
     suspend fun updateRegistro(@Body registro: Registro): Response<Registro>
 
     @POST("register/")
-    suspend fun registrarUsuario(@Body usuario: Usuario): Response<UsuarioResponse>
+    suspend fun registrarUsuario(@Body usuario: Usuario): Response<Usuario>
 
     @POST("login/")
-    suspend fun loginUsuario(@Body usuario: Usuario): Response<UsuarioResponse>
+    suspend fun loginUsuario(@Body usuario: Usuario): Response<Usuario>
 }
 
 object RegistroNetwork {
