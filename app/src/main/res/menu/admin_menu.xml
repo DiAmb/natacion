@@ -6,13 +6,13 @@
         android:title="@string/tituloUsuario">
         <menu>
             <item
-                android:id="@+id/search_item"
+                android:id="@+id/btnSidePermisos"
                 android:checkable="true"
                 android:icon="@drawable/ic_permisos"
                 android:title="@string/permisos"
                 app:showAsAction="ifRoom" />
             <item
-                android:id="@+id/rotation_item"
+                android:id="@+id/btnSideEstadisticas"
                 android:checkable="true"
                 android:icon="@drawable/ic_estadisticas"
                 android:title="@string/estadisticas"
@@ -24,7 +24,7 @@
         android:title="@string/tituloMenuRegistro">
         <menu>
             <item
-                android:id="@+id/label_one"
+                android:id="@+id/btnSideNuevoRegistro"
                 android:checkable="true"
                 android:icon="@drawable/ic_add"
                 android:title="@string/agregarRegistro"

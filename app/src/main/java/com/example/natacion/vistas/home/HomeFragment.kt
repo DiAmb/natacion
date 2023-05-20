@@ -76,11 +76,30 @@ class HomeFragment : Fragment() {
             true
         }
 
-        binding.topAppBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.btnMenuHomeNuevo -> {
+        binding.adminMenu.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.btnSidePermisos -> {
+                    false
+                }
+                R.id.btnSideEstadisticas -> {
+                    false
+                }
+                R.id.btnSideNuevoRegistro -> {
                     NavHostFragment.findNavController(this)
                         .navigate(R.id.action_homeFragment_to_crearRegistrosFragment)
+                    false
+                }
+                else -> {
+                    false
+                }
+            }
+
+        }
+
+        binding.topAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.btnMenuLogout -> {
+
                     true
                 }
                 else -> {
