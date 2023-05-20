@@ -35,19 +35,8 @@ class FragmentLogin : Fragment() {
         binding.loginViewModel = loginViewModel
 
         binding.btnRegistrar.setOnClickListener {
-            var email: String = binding.txtCorreo.text.toString()
-            var password: String = binding.txtPassword.text.toString()
-
-            if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
-                loginViewModel.registrarUsuario(email, password, "Nombre Test", "Apellidos Test")
-            } else {
-                Toast.makeText(
-                    context,
-                    "Ingrese todos los campos para poder continuar.",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
+            NavHostFragment.findNavController(this)
+                .navigate(FragmentLoginDirections.actionFragmentLoginToRegistrarseFragment())
         }
 
         binding.btnAcceder.setOnClickListener {
@@ -66,16 +55,26 @@ class FragmentLogin : Fragment() {
         }
 
         loginViewModel.loginSucess.observe(viewLifecycleOwner, Observer { res ->
-            if (res) {
-                goToHome()
+            when (res) {
+                -1 -> {
+                    Toast.makeText(context, "Login fallido.", Toast.LENGTH_SHORT).show()
+                    loginViewModel.resetCodeLogin()
+                }
+                0 -> {
+                    Toast.makeText(
+                        context,
+                        "No cuenta con autorización para acceder a la aplicación.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    loginViewModel.resetCodeLogin()
+                }
+                1 -> {
+                    goToHome()
+                    loginViewModel.resetCodeLogin()
+                }
             }
         })
 
-        loginViewModel.loginFailed.observe(viewLifecycleOwner, Observer { res ->
-            if (res) {
-                Toast.makeText(context, "Login fallido.", Toast.LENGTH_SHORT).show()
-            }
-        })
 
         return binding.root
     }

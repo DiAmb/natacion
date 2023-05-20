@@ -5,7 +5,7 @@
     <string name="correoHint">Escribe tu correo</string>
     <string name="passHint">Escribe tu constraseña</string>
     <string name="correo">Ingresa tu correo:</string>
-    <string name="registrar">Registrar</string>
+    <string name="registrar">Registrarse</string>
     <string name="acceder">Acceder</string>
     <string name="buscar">Buscar</string>
     <string name="titulo_registro">%d. %s</string>
@@ -26,8 +26,7 @@
     <string name="url_de_imagen">URL de imagen</string>
     <string name="url_de_audio">URL de audio</string>
 
-
-
+    <!--  Menu de Home  -->
     <string name="tituloUsuario">Usuario</string>
     <string name="estadisticas">Estadísticas</string>
     <string name="permisos">Permisos</string>
@@ -35,4 +34,9 @@
     <string name="tituloMenuRegistro">Registros</string>
     <string name="agregarRegistro">Crear nuevo</string>
 
+    <!--  Registro de usuario  -->
+    <string name="txtCorreoRegistro">Correo Electrónico*</string>
+    <string name="txtPasswordRegistro">Constraseña*</string>
+    <string name="txtNombreRegistro">Nombres*</string>
+    <string name="txtApellidoRegistro">Apellidos*</string>
 </resources>

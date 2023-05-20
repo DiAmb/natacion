@@ -22,57 +22,52 @@ import org.json.JSONObject
 class LoginViewModel(dataSource: DataDao, application: Application) :
     AndroidViewModel(application) {
 
-    private val _loginSucess = MutableLiveData<Boolean>()
-    val loginSucess: LiveData<Boolean> get() = _loginSucess
-
-    private val _loginFailed = MutableLiveData<Boolean>()
-    val loginFailed: LiveData<Boolean> get() = _loginFailed
-
+    private val _loginSucess = MutableLiveData<Int>()
+    val loginSucess: LiveData<Int> get() = _loginSucess
 
     private val database = dataSource
 
     init {
-        _loginFailed.value = false
-        _loginSucess.value = false
-    }
-
-    fun registrarUsuario(email: String, password: String, nombres: String, apellidos: String) {
-        viewModelScope.launch {
-            val usuario =
-                RegistroNetwork.registros.registrarUsuario(
-                    Usuario(
-                        email,
-                        password,
-                        0,
-                        nombres,
-                        apellidos
-                    )
-                ).body()
-            if (usuario != null) {
-                database.deleteAllUsuario()
-                database.inserUsuario(usuario)
-                _loginSucess.value = true
-            } else {
-                _loginFailed.value = true
-            }
-
-
-        }
+        _loginSucess.value = -100
     }
 
     fun accederUsuario(email: String, password: String) {
         viewModelScope.launch {
             val usuarioResponse =
                 RegistroNetwork.registros.loginUsuario(Usuario(email, password)).body()
-
             if (usuarioResponse != null) {
-                database.deleteAllUsuario()
-                database.inserUsuario(usuarioResponse)
-                _loginSucess.value = true
+                //-1 SIN AUTORIZACION
+                //0 CON AUTORIZACION DE LECTURA
+                //1 CON AUTORIZACION DE EDITOR
+                //2 ADMINISTRADOR
+                when (usuarioResponse.tipo) {
+                    -1 -> {
+                        _loginSucess.value = 0
+                    }
+                    0 -> {
+                        _loginSucess.value = 1
+                        database.deleteAllUsuario()
+                        database.inserUsuario(usuarioResponse)
+                    }
+                    1 -> {
+                        _loginSucess.value = 1
+                        database.deleteAllUsuario()
+                        database.inserUsuario(usuarioResponse)
+                    }
+                    2 -> {
+                        _loginSucess.value = 1
+                        database.deleteAllUsuario()
+                        database.inserUsuario(usuarioResponse)
+                    }
+                }
             } else {
-                _loginFailed.value = true
+                _loginSucess.value = -1
             }
         }
+    }
+
+    fun resetCodeLogin() {
+        _loginSucess.value = -100
     }
 
 

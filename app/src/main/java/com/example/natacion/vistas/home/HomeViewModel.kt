@@ -27,8 +27,12 @@ class HomeViewModel(dataSource: DataDao, application: Application) :
     private val _registros = MutableLiveData<List<Registro>?>()
     val registros: LiveData<List<Registro>?> get() = _registros
 
+    private val _logOutSuccess = MutableLiveData<Boolean>()
+    val logOutSuccess: LiveData<Boolean> get() = _logOutSuccess
+
     init {
         getRegistros()
+        _logOutSuccess.value = false
     }
 
     fun getRegistros() {
@@ -66,6 +70,17 @@ class HomeViewModel(dataSource: DataDao, application: Application) :
 
     private suspend fun getRegistrosFromDatabaseByNumero(numero: Int): List<Registro> {
         return database.getRegistrosByNumero(numero)
+    }
+
+    fun logOut() {
+        viewModelScope.launch {
+            clearLoginDatabase()
+            _logOutSuccess.value = true
+        }
+    }
+
+    suspend private fun clearLoginDatabase() {
+        database.deleteAllUsuario()
     }
 
 

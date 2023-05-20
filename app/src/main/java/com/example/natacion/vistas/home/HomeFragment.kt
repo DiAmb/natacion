@@ -99,15 +99,21 @@ class HomeFragment : Fragment() {
         binding.topAppBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.btnMenuLogout -> {
-
+                    homeViewModel.logOut()
                     true
                 }
                 else -> {
                     false
                 }
             }
-
         }
+
+        homeViewModel.logOutSuccess.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                NavHostFragment.findNavController(this)
+                    .navigate(HomeFragmentDirections.actionHomeFragmentToFragmentLogin())
+            }
+        })
 
         binding.btnBuscar.setOnClickListener {
             if (binding.spTipo.selectedItem.toString() == "Titulo") {

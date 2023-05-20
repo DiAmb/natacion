@@ -31,6 +31,9 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragmentLogin_to_registrarseFragment"
+            app:destination="@id/registrarseFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -43,6 +46,11 @@
         <action
             android:id="@+id/action_homeFragment_to_crearRegistrosFragment"
             app:destination="@id/crearRegistrosFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentLogin"
+            app:destination="@id/fragmentLogin"
+            app:popUpTo="@id/fragmentLogin"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/verRegistrosFragment"
@@ -117,5 +125,10 @@
             android:name="subtitulo"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/registrarseFragment"
+        android:name="com.example.natacion.vistas.regitrarse.RegistrarseFragment"
+        android:label="fragment_registrarse"
+        tools:layout="@layout/fragment_registrarse" />
 
 </navigation>

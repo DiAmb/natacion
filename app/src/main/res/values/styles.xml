@@ -2,7 +2,7 @@
 <resources>
 
     <style name="NameStyle">
-        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:fontFamily">@font/roboto_lights</item>
         <item name="android:padding">@dimen/small_padding</item>
     </style>
 
