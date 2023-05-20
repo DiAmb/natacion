@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.Glide
 import com.example.natacion.R
+import com.example.natacion.database.DataDatabase
 import com.example.natacion.database.Registro
 import com.example.natacion.databinding.FragmentCrearRegistrosBinding
 import com.example.natacion.databinding.FragmentVerRegistrosBinding
@@ -38,8 +39,9 @@ class VerRegistrosFragment : Fragment() {
             inflater, R.layout.fragment_ver_registros, container, false
         )
         val application = requireNotNull(this.activity).application
+        val dataSource = DataDatabase.getInstance(application).dataDao
 
-        val viewModelFactory = VerRegistrosViewModelFactory(application)
+        val viewModelFactory = VerRegistrosViewModelFactory(dataSource, application)
 
         val verRegistrosViewModel =
             ViewModelProvider(
@@ -234,9 +236,23 @@ class VerRegistrosFragment : Fragment() {
             }
         }
 
-
-        verRegistrosViewModel.showAdminOption.observe(viewLifecycleOwner, Observer {
-            if (!it) {
+        verRegistrosViewModel.usuarioLogged.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                when (it.tipo) {
+                    0 -> {
+                        binding.topAppBar.menu.get(0).setVisible(false)
+                        binding.topAppBar.menu.get(1).setVisible(false)
+                    }
+                    1 -> {
+                        binding.topAppBar.menu.get(0).setVisible(true)
+                        binding.topAppBar.menu.get(1).setVisible(false)
+                    }
+                    2 -> {
+                        binding.topAppBar.menu.get(0).setVisible(true)
+                        binding.topAppBar.menu.get(1).setVisible(true)
+                    }
+                }
+            } else {
                 binding.topAppBar.menu.get(0).setVisible(false)
                 binding.topAppBar.menu.get(1).setVisible(false)
             }

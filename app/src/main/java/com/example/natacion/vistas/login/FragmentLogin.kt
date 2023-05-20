@@ -69,8 +69,8 @@ class FragmentLogin : Fragment() {
                     loginViewModel.resetCodeLogin()
                 }
                 1 -> {
-                    goToHome()
                     loginViewModel.resetCodeLogin()
+                    goToHome()
                 }
             }
         })

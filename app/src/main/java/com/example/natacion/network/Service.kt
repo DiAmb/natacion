@@ -20,21 +20,21 @@ interface DataService {
     suspend fun getRegistros(): List<Registro>
 
     @GET("registros/registros.php/")
-    suspend fun getRegistrosByNumero(@Query("numero") numero:Int): List<Registro>
+    suspend fun getRegistrosByNumero(@Query("numero") numero: Int): List<Registro>
 
-    @GET("registros/")
-    suspend fun getRegistrosByTitulo(@Query("titulo") numero:String): List<Registro>
+    @GET("registros/registros.php/")
+    suspend fun getRegistrosByTitulo(@Query("titulo") numero: String): List<Registro>
 
-    @POST("registros/")
+    @POST("registros/registros.php/")
     suspend fun insertRegistro(@Body registro: Registro): Response<Registro>
 
-    @PUT("registros/")
+    @PUT("registros/registros.php/")
     suspend fun updateRegistro(@Body registro: Registro): Response<Registro>
 
-    @POST("register/")
+    @POST("register/usuario.php/")
     suspend fun registrarUsuario(@Body usuario: Usuario): Response<Usuario>
 
-    @POST("login/")
+    @POST("login/usuario.php/")
     suspend fun loginUsuario(@Body usuario: Usuario): Response<Usuario>
 }
 

@@ -4,9 +4,11 @@
     <item
         android:id="@+id/btnMenuRegistroEditar"
         android:icon="@drawable/edit_icon_dark"
-        android:title="Editar" />
+        android:title="Editar"
+        android:visible="false" />
     <item
         android:id="@+id/btnMenuRegistroEliminar"
         android:icon="@drawable/ic_save"
-        android:title="Eliminar" />
+        android:title="Eliminar"
+        android:visible="false" />
 </menu>

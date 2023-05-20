@@ -46,17 +46,14 @@ class LoginViewModel(dataSource: DataDao, application: Application) :
                     }
                     0 -> {
                         _loginSucess.value = 1
-                        database.deleteAllUsuario()
                         database.inserUsuario(usuarioResponse)
                     }
                     1 -> {
                         _loginSucess.value = 1
-                        database.deleteAllUsuario()
                         database.inserUsuario(usuarioResponse)
                     }
                     2 -> {
                         _loginSucess.value = 1
-                        database.deleteAllUsuario()
                         database.inserUsuario(usuarioResponse)
                     }
                 }

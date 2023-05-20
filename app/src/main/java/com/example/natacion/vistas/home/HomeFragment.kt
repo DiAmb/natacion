@@ -32,6 +32,7 @@ class HomeFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         homeViewModel.getRegistros()
+        homeViewModel.getDataUsuario()
     }
 
 
@@ -132,13 +133,24 @@ class HomeFragment : Fragment() {
                     Log.d("Error", e.message.toString())
                     homeViewModel.getAllRegistros()
                 }
-
-
             }
-
-
             binding.txtBuscar.clearFocus()
         }
+
+        homeViewModel.usuarioLogged.observe(viewLifecycleOwner, Observer { res ->
+            if (res != null) {
+                when (res.tipo) {
+                    2 -> {
+
+                    }
+                    else -> {
+                        binding.topAppBar.navigationIcon = null
+                    }
+                }
+            } else {
+                binding.topAppBar.navigationIcon = null
+            }
+        })
 
 
         return binding.root

@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.natacion.database.DataDao
 import com.example.natacion.database.Registro
+import com.example.natacion.database.Usuario
 import com.example.natacion.repository.DataRepository
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -30,8 +31,13 @@ class HomeViewModel(dataSource: DataDao, application: Application) :
     private val _logOutSuccess = MutableLiveData<Boolean>()
     val logOutSuccess: LiveData<Boolean> get() = _logOutSuccess
 
+    private val _usuarioLogged = MutableLiveData<Usuario?>()
+    val usuarioLogged: LiveData<Usuario?> get() = _usuarioLogged
+
+
     init {
         getRegistros()
+        getDataUsuario()
         _logOutSuccess.value = false
     }
 
@@ -81,6 +87,16 @@ class HomeViewModel(dataSource: DataDao, application: Application) :
 
     suspend private fun clearLoginDatabase() {
         database.deleteAllUsuario()
+    }
+
+    fun getDataUsuario() {
+        viewModelScope.launch {
+            _usuarioLogged.value = getUsuarioDataBase()
+        }
+    }
+
+    suspend fun getUsuarioDataBase(): Usuario? {
+        return database.isLogged()
     }
 
 

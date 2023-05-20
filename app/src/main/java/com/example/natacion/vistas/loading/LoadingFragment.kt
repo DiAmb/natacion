@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.natacion.R
@@ -41,16 +42,16 @@ class LoadingFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.loadingViewModel = loadingViewModel
 
-        GlobalScope.launch(Dispatchers.Main) {
-            val currentUser = loadingViewModel.hasData()
-            delay(1000)
-            if (currentUser != null) {
+        loadingViewModel.goTitle.observe(viewLifecycleOwner, Observer {
+            if (it) {
                 goToTitle()
-            } else {
+            }
+        })
+        loadingViewModel.goLogin.observe(viewLifecycleOwner, Observer {
+            if (it) {
                 goToLogin()
             }
-
-        }
+        })
 
         return binding.root
     }
