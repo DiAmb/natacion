@@ -31,11 +31,16 @@ interface DataService {
     @PUT("registros/registros.php/")
     suspend fun updateRegistro(@Body registro: Registro): Response<Registro>
 
+    @DELETE("login/registros.php/")
+    suspend fun deleteRegistro(@Query("id") numero: Int): Response<Boolean>
+
     @POST("register/usuario.php/")
     suspend fun registrarUsuario(@Body usuario: Usuario): Response<Usuario>
 
     @POST("login/usuario.php/")
     suspend fun loginUsuario(@Body usuario: Usuario): Response<Usuario>
+
+
 }
 
 object RegistroNetwork {
@@ -51,7 +56,7 @@ object RegistroNetwork {
 
     // Configure retrofit to parse JSON and use coroutines
     private val retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.1.105/datagen/")
+        .baseUrl("https://datagen.ingsistemascunori.org/datagen/")
         .client(client)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
