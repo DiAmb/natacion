@@ -11,6 +11,7 @@ import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -18,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.Glide
 import com.example.natacion.R
+import com.example.natacion.database.Registro
 import com.example.natacion.databinding.FragmentCrearRegistrosBinding
 import com.example.natacion.databinding.FragmentVerRegistrosBinding
 import java.io.IOException
@@ -57,13 +59,15 @@ class VerRegistrosFragment : Fragment() {
 
         Glide.with(binding.root).load(imagen).into(binding.imageView);
 
-            binding.txtTitulo.text = numero.toString() + " " + titulo
+        binding.txtTitulo.text = numero.toString() + " " + titulo
         binding.txtSubtitulo.text = subtitulo
         binding.txtDescripcion.text = descripcion
         TiempoReproducidoAudio = binding.timeCurrent
         TiempoRestanteAudio = binding.timeLeft
-        if(!mediaPlayer.isPlaying){
-            if(!audio.isNullOrEmpty()){
+        binding.topAppBar.title = numero.toString() + " " + titulo
+
+        if (!mediaPlayer.isPlaying) {
+            if (!audio.isNullOrEmpty()) {
 
                 try {
                     if (mediaPlayer.isPlaying) {
@@ -82,16 +86,17 @@ class VerRegistrosFragment : Fragment() {
                         setupSeekBar()
                     }
                     binding.btnPlay.setBackgroundResource(R.drawable.ic_pause)
-                }catch (e: IOException) {
+                } catch (e: IOException) {
                     Toast.makeText(
                         requireContext(),
                         "Error al establecer la fuente de audio",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            }else{
+            } else {
                 Toast.makeText(this.context, "Direccion url invalida", Toast.LENGTH_SHORT).show()
-            }}
+            }
+        }
         binding.btnPlay.setOnClickListener {
 //            if(!audio.isNullOrEmpty()){
 //                if(mediaPlayer.isPlaying){
@@ -162,8 +167,6 @@ class VerRegistrosFragment : Fragment() {
             togglePlayback()
 
 
-
-
         }
         binding.progresoAudio.max = 0
 
@@ -175,63 +178,74 @@ class VerRegistrosFragment : Fragment() {
             }
         })
 
-        binding.btnRegresar.setOnClickListener {
+        binding.topAppBar.setNavigationOnClickListener {
             NavHostFragment.findNavController(this).popBackStack()
         }
 
-        binding.btnEditar.setOnClickListener {
-            var bundle = Bundle()
-            if (id != null) {
-                bundle.putInt("id", id)
-            }
-            if (numero != null) {
-                bundle.putInt("numero", numero)
-            }
+        binding.topAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.btnMenuRegistroEditar -> {
+                    var bundle = Bundle()
+                    if (id != null) {
+                        bundle.putInt("id", id)
+                    }
+                    if (numero != null) {
+                        bundle.putInt("numero", numero)
+                    }
 
-            bundle.putString("titulo", titulo)
-            bundle.putString("subtitulo", subtitulo)
-            bundle.putString("descripcion", descripcion)
-            bundle.putString("imagen", imagen)
-            bundle.putString("audio", audio)
-            NavHostFragment.findNavController(this)
-                .navigate(R.id.action_verRegistrosFragment_to_editarRegistrosFragment, bundle)
-        }
-
-        binding.btnEliminar.setOnClickListener {
-            val alertDialog: AlertDialog? = activity?.let {
-                val builder = AlertDialog.Builder(it)
-                builder.apply {
-                    setPositiveButton("Borrar",
-                        DialogInterface.OnClickListener { dialog, id ->
-                            Toast.makeText(context, "Eliminando", Toast.LENGTH_SHORT).show()
-                        })
-                    setNegativeButton("Cancelar",
-                        DialogInterface.OnClickListener { dialog, id ->
-                            // User cancelled th
-                        })
+                    bundle.putString("titulo", titulo)
+                    bundle.putString("subtitulo", subtitulo)
+                    bundle.putString("descripcion", descripcion)
+                    bundle.putString("imagen", imagen)
+                    bundle.putString("audio", audio)
+                    NavHostFragment.findNavController(this)
+                        .navigate(
+                            R.id.action_verRegistrosFragment_to_editarRegistrosFragment,
+                            bundle
+                        )
+                    true
                 }
-                // Set other dialog properties
-                builder?.setMessage("¿Deseas borrar este registro?")
-                    ?.setTitle("Alerta")
+                R.id.btnMenuRegistroEliminar -> {
+                    val alertDialog: AlertDialog? = activity?.let {
+                        val builder = AlertDialog.Builder(it)
+                        builder.apply {
+                            setPositiveButton("Borrar",
+                                DialogInterface.OnClickListener { dialog, id ->
+                                    Toast.makeText(context, "Eliminando", Toast.LENGTH_SHORT).show()
+                                })
+                            setNegativeButton("Cancelar",
+                                DialogInterface.OnClickListener { dialog, id ->
+                                    // User cancelled th
+                                })
+                        }
+                        // Set other dialog properties
+                        builder?.setMessage("¿Deseas borrar este registro?")
+                            ?.setTitle("Alerta")
 
-                // Create the AlertDialog
-                builder.create()
+                        // Create the AlertDialog
+                        builder.create()
+                    }
+                    alertDialog?.show()
+                    true
+                }
+                else -> {
+                    false
+                }
             }
-            alertDialog?.show()
         }
+
+
         verRegistrosViewModel.showAdminOption.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                binding.btnEliminar.visibility = View.VISIBLE
-                binding.btnEditar.visibility = View.VISIBLE
+            if (!it) {
+                binding.topAppBar.menu.get(0).setVisible(false)
+                binding.topAppBar.menu.get(1).setVisible(false)
             }
         })
 
-
-
-
         return binding.root
     }
-    private fun playAudio(audio:String) {
+
+    private fun playAudio(audio: String) {
         val audioUrl = audio
         mediaPlayer = MediaPlayer()
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
@@ -245,6 +259,7 @@ class VerRegistrosFragment : Fragment() {
         }
         Toast.makeText(this.context, "Audio en reproduccion...", Toast.LENGTH_SHORT).show()
     }
+
     private fun setupSeekBar() {
         val handler = Handler()
         handler.postDelayed(object : Runnable {

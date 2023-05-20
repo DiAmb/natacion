@@ -14,43 +14,49 @@
             type="com.example.natacion.vistas.home.HomeRegistroListener" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:onClick="@{()-> clickListener.onClick(registro)}"
+    <com.google.android.material.card.MaterialCardView
+        style="?attr/materialCardViewElevatedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small_padding"
-        android:background="@drawable/button_morado_oscuro"
-        android:padding="@dimen/layout_margin">
+        android:onClick="@{()-> clickListener.onClick(registro)}"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imgRegistro"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-
-        <TextView
-            android:layout_marginStart="@dimen/layout_margin"
-            android:id="@+id/txtTitulo"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_black"
-            android:text="@{@string/titulo_registro(registro.numero,registro.titulo)}"
-            app:layout_constraintStart_toEndOf="@+id/imgRegistro"
-            app:layout_constraintTop_toTopOf="@+id/imgRegistro" />
+            android:padding="@dimen/layout_margin">
 
-        <TextView
-            android:layout_width="0dp"
-            android:textColor="@color/white"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_lights"
-            android:text="@{registro.subtitulo}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/txtTitulo"
-            app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/imgRegistro"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTitulo"
+                style="@style/txtTituloRecycler"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/layout_margin"
+                android:text="@{@string/titulo_registro(registro.numero,registro.titulo)}"
+                app:layout_constraintStart_toEndOf="@+id/imgRegistro"
+                app:layout_constraintTop_toTopOf="@+id/imgRegistro" />
+
+            <TextView
+                style="@style/txtSubTituloRecycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{registro.subtitulo}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/txtTitulo"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 
 </layout>

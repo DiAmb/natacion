@@ -11,81 +11,92 @@
             type="com.example.natacion.vistas.home.HomeViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:background="#c8d8ff">
+        tools:openDrawer="start">
 
-        <LinearLayout
-            android:id="@+id/areaBusqueda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/layout_margin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <EditText
-                android:id="@+id/txtBuscar"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/buscar" />
-
-            <Spinner
-                android:id="@+id/spTipo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/busqueda_array" />
-
-            <Button
-                android:id="@+id/btnBuscar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_morado_oscuro"
-                android:text="@string/buscar"
-                android:textColor="@color/white" />
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/registros"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/linearBoton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/areaBusqueda" />
+            android:layout_height="match_parent"
+            >
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/topAppBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/md_theme_light_primary"
+                    app:layout_scrollFlags="enterAlways"
+                    app:menu="@menu/home_menu"
+                    app:navigationIcon="@drawable/ic_menu"
+                    app:title="@string/app_name"
+                    app:titleCentered="true"
+                    app:titleTextColor="@color/md_theme_light_onPrimary" />
+
+                <LinearLayout
+                    android:id="@+id/areaBusqueda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/small_padding">
+
+                    <EditText
+                        android:id="@+id/txtBuscar"
+                        android:layout_width="175dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/buscar" />
+
+                    <Spinner
+                        android:id="@+id/spTipo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/busqueda_array" />
+
+                    <Button
+                        android:id="@+id/btnBuscar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:background="@drawable/button_morado_oscuro"
+                        android:padding="0dp"
+                        android:text="@string/buscar" />
+                </LinearLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
 
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
-            android:id="@+id/linearBoton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:orientation="vertical"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/button_redondo">
-            <Button
-                android:id="@+id/btnCrear"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:scaleType="centerCrop"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:backgroundTint="@color/white"
-                android:background="@drawable/ic_add"
-                android:layout_marginTop="4dp"/>
-        </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/registros"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            </androidx.core.widget.NestedScrollView>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/adminMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:menu="@menu/admin_menu" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
 
 </layout>

@@ -65,15 +65,34 @@ class HomeFragment : Fragment() {
         binding.registros.adapter = adapter
 
 
+        binding.topAppBar.setNavigationOnClickListener {
+            binding.drawerLayout.open()
+        }
 
-        binding.btnCrear.setOnClickListener {
-            NavHostFragment.findNavController(this)
-                .navigate(R.id.action_homeFragment_to_crearRegistrosFragment)
+        binding.adminMenu.setNavigationItemSelectedListener { menuItem ->
+            // Handle menu item selected
+            menuItem.isChecked = true
+            binding.drawerLayout.close()
+            true
+        }
+
+        binding.topAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.btnMenuHomeNuevo -> {
+                    NavHostFragment.findNavController(this)
+                        .navigate(R.id.action_homeFragment_to_crearRegistrosFragment)
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+
         }
 
         binding.btnBuscar.setOnClickListener {
             if (binding.spTipo.selectedItem.toString() == "Titulo") {
-                val titulo = "%"+binding.txtBuscar.text.toString()+"%"
+                val titulo = "%" + binding.txtBuscar.text.toString() + "%"
                 if (!titulo.isNullOrEmpty()) {
                     homeViewModel.getRegistrosByTitulo(titulo)
                 } else {
@@ -91,6 +110,9 @@ class HomeFragment : Fragment() {
 
 
             }
+
+
+            binding.txtBuscar.clearFocus()
         }
 
 

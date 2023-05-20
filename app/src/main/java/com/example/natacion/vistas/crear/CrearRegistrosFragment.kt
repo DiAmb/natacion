@@ -49,10 +49,37 @@ class CrearRegistrosFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.crearRegistrosViewModel = crearRegistrosViewModel
 
-        binding.btnRegresar.setOnClickListener {
+        binding.topAppBar.setNavigationOnClickListener {
             NavHostFragment.findNavController(this).popBackStack()
-
         }
+
+        binding.topAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.btnMenuGuardar -> {
+                    val registro = Registro(
+                        0,
+                        binding.editNumero.text.toString().toInt(),
+                        binding.editTitulo.text.toString(),
+                        binding.editSubtitulo.text.toString(),
+                        binding.editDescripcion.text.toString(),
+                        binding.editImagen.text.toString(),
+                        binding.editAudio.text.toString()
+                    )
+                    crearRegistrosViewModel.insertRegistro(
+                        registro
+                    )
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
+
+        /*binding.btnRegresar.setOnClickListener {
+
+
+        }*/
 
 //        binding.btnMusica.setOnClickListener {
 //            val intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -78,7 +105,7 @@ class CrearRegistrosFragment : Fragment() {
 //            intent.type = "image/*"
 //            startActivityForResult(intent, REQUEST_IMAGE)
 //        }
-
+/*
         binding.btnGuardar.setOnClickListener {
             val registro = Registro(
                 0,
@@ -92,7 +119,7 @@ class CrearRegistrosFragment : Fragment() {
             crearRegistrosViewModel.insertRegistro(
                 registro
             )
-        }
+        }*/
 
         crearRegistrosViewModel.backHome.observe(viewLifecycleOwner, Observer {
             if (it) {

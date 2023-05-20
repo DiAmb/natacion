@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Himnario Virtual</string>
+    <string name="creando">Nuevo registro</string>
+    <string name="editando">Editando registro</string>
     <string name="correoHint">Escribe tu correo</string>
     <string name="passHint">Escribe tu constraseña</string>
     <string name="correo">Ingresa tu correo:</string>
@@ -7,6 +9,7 @@
     <string name="acceder">Acceder</string>
     <string name="buscar">Buscar</string>
     <string name="titulo_registro">%d. %s</string>
+
 
     <string name="password">Ingresa tu contraseña:</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -17,10 +20,19 @@
     <string name="descripcion">Descripcion</string>
     <string name="titulo">Titulo</string>
     <string name="descripcion1">Descripcion</string>
-    <string name="titulo1">Titulo</string>
     <string name="himno">Himno #</string>
     <string name="contenido">aa\naa\naa\naa\naa\naa\naa\n aa\naa\naa\naa\naa\naa\naa\naa\naa\naa\naa</string>
     <string name="numero_de_himno">Número de Himno</string>
     <string name="url_de_imagen">URL de imagen</string>
     <string name="url_de_audio">URL de audio</string>
+
+
+
+    <string name="tituloUsuario">Usuario</string>
+    <string name="estadisticas">Estadísticas</string>
+    <string name="permisos">Permisos</string>
+
+    <string name="tituloMenuRegistro">Registros</string>
+    <string name="agregarRegistro">Crear nuevo</string>
+
 </resources>

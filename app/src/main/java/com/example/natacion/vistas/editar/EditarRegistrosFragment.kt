@@ -49,23 +49,31 @@ class EditarRegistrosFragment : Fragment() {
         binding.editSubtitulo.setText(subtitulo)
         binding.editNumero.setText(numero.toString())
 
-        binding.btnRegresar.setOnClickListener {
+        binding.topAppBar.setNavigationOnClickListener {
             NavHostFragment.findNavController(this).popBackStack()
         }
 
-        binding.btnGuardar.setOnClickListener {
-            val registro = Registro(
-                id,
-                binding.editNumero.text.toString().toInt(),
-                binding.editTitulo.text.toString(),
-                binding.editSubtitulo.text.toString(),
-                binding.editDescripcion.text.toString(),
-                binding.editImagen.text.toString(),
-                binding.editAudio.text.toString()
-            )
-            editarRegistrosViewModel.updateRegistro(
-                registro
-            )
+        binding.topAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.btnMenuGuardar -> {
+                    val registro = Registro(
+                        id,
+                        binding.editNumero.text.toString().toInt(),
+                        binding.editTitulo.text.toString(),
+                        binding.editSubtitulo.text.toString(),
+                        binding.editDescripcion.text.toString(),
+                        binding.editImagen.text.toString(),
+                        binding.editAudio.text.toString()
+                    )
+                    editarRegistrosViewModel.updateRegistro(
+                        registro
+                    )
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
         }
 
         editarRegistrosViewModel.backHome.observe(viewLifecycleOwner, Observer {
@@ -76,7 +84,7 @@ class EditarRegistrosFragment : Fragment() {
                 bundle.putString("titulo", binding.editTitulo.text.toString())
                 bundle.putString("subtitulo", binding.editSubtitulo.text.toString())
                 bundle.putString("descripcion", binding.editDescripcion.text.toString())
-                bundle.putString("imagen",binding.editImagen.text.toString())
+                bundle.putString("imagen", binding.editImagen.text.toString())
                 bundle.putString("audio", binding.editAudio.text.toString())
                 NavHostFragment.findNavController(this)
                     .navigate(R.id.action_editarRegistrosFragment_to_verRegistrosFragment, bundle)
