@@ -184,6 +184,12 @@ class VerRegistrosFragment : Fragment() {
             NavHostFragment.findNavController(this).popBackStack()
         }
 
+        verRegistrosViewModel.completeDelete.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                NavHostFragment.findNavController(this).popBackStack()
+            }
+        })
+
         binding.topAppBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.btnMenuRegistroEditar -> {
@@ -212,11 +218,13 @@ class VerRegistrosFragment : Fragment() {
                         val builder = AlertDialog.Builder(it)
                         builder.apply {
                             setPositiveButton("Borrar",
-                                DialogInterface.OnClickListener { dialog, id ->
-                                    Toast.makeText(context, "Eliminando", Toast.LENGTH_SHORT).show()
+                                DialogInterface.OnClickListener { dialog, iden ->
+                                    if (id != null) {
+                                        verRegistrosViewModel.deleteRegistro(id)
+                                    }
                                 })
                             setNegativeButton("Cancelar",
-                                DialogInterface.OnClickListener { dialog, id ->
+                                DialogInterface.OnClickListener { dialog, iden ->
                                     // User cancelled th
                                 })
                         }

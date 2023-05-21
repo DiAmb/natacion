@@ -12,6 +12,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import java.util.*
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
+import okhttp3.ResponseBody
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
@@ -31,8 +32,8 @@ interface DataService {
     @PUT("registros/registros.php/")
     suspend fun updateRegistro(@Body registro: Registro): Response<Registro>
 
-    @DELETE("login/registros.php/")
-    suspend fun deleteRegistro(@Query("id") numero: Int): Response<Boolean>
+    @DELETE("registros/registros.php/")
+    suspend fun deleteRegistro(@Query("id") numero: Int): Response<ResponseBody>
 
     @POST("register/usuario.php/")
     suspend fun registrarUsuario(@Body usuario: Usuario): Response<Usuario>
