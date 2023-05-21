@@ -6,11 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Registro::class,Usuario::class],
-    version = 13,
+    entities = [Registro::class, Usuario::class, Favoritos::class],
+    version = 15,
     exportSchema = false
 )
-abstract class DataDatabase: RoomDatabase() {
+abstract class DataDatabase : RoomDatabase() {
 
     abstract val dataDao: DataDao
 

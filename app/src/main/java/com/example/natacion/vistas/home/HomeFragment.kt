@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
             bundle.putString("audio", registro.audio)
             NavHostFragment.findNavController(this)
                 .navigate(R.id.action_homeFragment_to_verRegistrosFragment, bundle)
-        })
+        }, homeViewModel)
         homeViewModel.registros.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
@@ -127,7 +127,7 @@ class HomeFragment : Fragment() {
                     homeViewModel.getAllRegistros()
                 }
 
-            } else {
+            } else if (binding.spTipo.selectedItem.toString() == "Número") {
                 try {
                     val numero = binding.txtBuscar.text.toString().toInt()
                     homeViewModel.getRegistrosByNumero(numero)
@@ -135,6 +135,8 @@ class HomeFragment : Fragment() {
                     Log.d("Error", e.message.toString())
                     homeViewModel.getAllRegistros()
                 }
+            } else {
+                homeViewModel.getRegistrosByFavoritos()
             }
             binding.txtBuscar.clearFocus()
         }
@@ -159,6 +161,31 @@ class HomeFragment : Fragment() {
                 binding.loadBlock.visibility = View.VISIBLE
             } else {
                 binding.loadBlock.visibility = View.INVISIBLE
+            }
+        })
+
+        homeViewModel.dataChange.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                if (binding.spTipo.selectedItem.toString() == "Titulo") {
+                    val titulo = "%" + binding.txtBuscar.text.toString() + "%"
+                    if (!titulo.isNullOrEmpty()) {
+                        homeViewModel.getRegistrosByTitulo(titulo)
+                    } else {
+                        homeViewModel.getAllRegistros()
+                    }
+
+                } else if (binding.spTipo.selectedItem.toString() == "Número") {
+                    try {
+                        val numero = binding.txtBuscar.text.toString().toInt()
+                        homeViewModel.getRegistrosByNumero(numero)
+                    } catch (e: java.lang.Exception) {
+                        Log.d("Error", e.message.toString())
+                        homeViewModel.getAllRegistros()
+                    }
+                } else {
+                    homeViewModel.getRegistrosByFavoritos()
+                }
+                homeViewModel.disableChange()
             }
         })
 
