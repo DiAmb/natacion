@@ -52,6 +52,7 @@ class AdminFragment : Fragment() {
             true
         }
 
+
         adminViewModel.usuarioLogged.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adminViewModel.getUsuarios(it)

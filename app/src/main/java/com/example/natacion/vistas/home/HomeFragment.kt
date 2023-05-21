@@ -1,5 +1,8 @@
 package com.example.natacion.vistas.home
 
+import android.app.AlertDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -85,8 +88,24 @@ class HomeFragment : Fragment() {
                     false
                 }
                 R.id.btnSideEstadisticas -> {
+                    val url = "https://console.firebase.google.com/u/5/project/natacion-8706f/analytics/app/android:com.example.natacion/overview/~2F%3Ft%3D1684698971502&fpn%3D382984184624&swu%3D1&sgu%3D1&cs%3Dapp.m.dashboard.overview&g%3D1" // Cambia esta URL por la que desees abrir
+
+                    val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                    alertDialogBuilder.setTitle("Confirmación")
+                    alertDialogBuilder.setMessage("¿Estás seguro de que deseas seguir el enlace, debe proporcionar las credenciales del administrador?")
+                    alertDialogBuilder.setPositiveButton("Sí") { dialog, which ->
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                        startActivity(intent)
+                    }
+                    alertDialogBuilder.setNegativeButton("No") { dialog, which ->
+                        // El usuario no desea seguir el enlace, no se realiza ninguna acción
+                    }
+
+                    val alertDialog = alertDialogBuilder.create()
+                    alertDialog.show()
                     false
                 }
+
                 R.id.btnSideNuevoRegistro -> {
                     NavHostFragment.findNavController(this)
                         .navigate(R.id.action_homeFragment_to_crearRegistrosFragment)
