@@ -3,8 +3,8 @@ package com.example.natacion.network
 
 import com.example.natacion.database.Registro
 import com.example.natacion.database.Usuario
-import com.example.natacion.database.UsuarioResponse
-import com.example.natacion.repository.DataRepository
+import com.example.natacion.database.UsuarioDelete
+import com.example.natacion.database.UsuarioUpdate
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -40,6 +40,15 @@ interface DataService {
 
     @POST("login/usuario.php/")
     suspend fun loginUsuario(@Body usuario: Usuario): Response<Usuario>
+
+    @POST("admin/usuario.php/")
+    suspend fun getUsuarios(@Body usuario: Usuario): Response<List<Usuario>>
+
+    @PUT("admin/usuario.php/")
+    suspend fun updateUsuario(@Body data: UsuarioUpdate): Response<List<Usuario>>
+
+    @HTTP(method = "DELETE", hasBody = true, path = "admin/usuario.php/")
+    suspend fun deleteUsuario(@Body data: UsuarioDelete): Response<List<Usuario>>
 
 
 }

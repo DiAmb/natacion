@@ -80,6 +80,8 @@ class HomeFragment : Fragment() {
         binding.adminMenu.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.btnSidePermisos -> {
+                    NavHostFragment.findNavController(this)
+                        .navigate(HomeFragmentDirections.actionHomeFragmentToAdminFragment())
                     false
                 }
                 R.id.btnSideEstadisticas -> {

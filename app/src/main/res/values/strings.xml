@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Himnario Virtual</string>
     <string name="creando">Nuevo registro</string>
+    <string name="usuarios">Gestión de usuarios</string>
     <string name="editando">Editando registro</string>
     <string name="correoHint">Escribe tu correo</string>
     <string name="passHint">Escribe tu constraseña</string>
@@ -40,4 +41,10 @@
     <string name="txtPasswordRegistro">Constraseña*</string>
     <string name="txtNombreRegistro">Nombres*</string>
     <string name="txtApellidoRegistro">Apellidos*</string>
+
+    <!--    Radio Button Group-->
+    <string name="sinAcceso">Sin Acceso</string>
+    <string name="lector">Lector</string>
+    <string name="editor">Editor</string>
+    <string name="admin">Admin</string>
 </resources>

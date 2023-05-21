@@ -51,6 +51,9 @@
             app:destination="@id/fragmentLogin"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_adminFragment"
+            app:destination="@id/adminFragment" />
     </fragment>
     <fragment
         android:id="@+id/verRegistrosFragment"
@@ -130,5 +133,10 @@
         android:name="com.example.natacion.vistas.regitrarse.RegistrarseFragment"
         android:label="fragment_registrarse"
         tools:layout="@layout/fragment_registrarse" />
+    <fragment
+        android:id="@+id/adminFragment"
+        android:name="com.example.natacion.vistas.admin.AdminFragment"
+        android:label="fragment_admin"
+        tools:layout="@layout/fragment_admin" />
 
 </navigation>
