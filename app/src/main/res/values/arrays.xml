@@ -3,5 +3,6 @@
     <string-array name="busqueda_array">
         <item>Titulo</item>
         <item>Número</item>
+        <item>Favoritos</item>
     </string-array>
 </resources>

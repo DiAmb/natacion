@@ -15,13 +15,13 @@ import com.example.natacion.database.Usuario
 import com.example.natacion.databinding.UsuarioBinding
 
 
-class AdminAdapter(val viewListViewModel: AdminViewModel) :
+class AdminAdapter(val adminViewModel: AdminViewModel) :
     ListAdapter<Usuario, AdminAdapter.ViewHolder>(
         ViewListDiffCallback()
     ) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position)!!, viewListViewModel)
+        holder.bind(getItem(position)!!, adminViewModel)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

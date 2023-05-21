@@ -35,4 +35,24 @@ interface DataDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRegistro(registro: Registro)
+
+    //FAVORITOS
+    @Query("DELETE FROM Favoritos")
+    suspend fun deleteAllFavoritos()
+
+    @Query("DELETE FROM Favoritos where id = :id")
+    suspend fun deleteFavorito(id: Int)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addFavorito(favorito: Favoritos)
+
+    @Query("select * from Favoritos")
+    suspend fun getFavoritos(): List<Favoritos>
+
+    @Query("select * from Favoritos where id = :id limit 1")
+    suspend fun getFavorito(id: Int): Favoritos
+
+    @Query("SELECT * FROM Registro WHERE id IN (:ids)")
+    suspend fun getRegistrosFavoritos(ids: ArrayList<Int>): List<Registro>
+
 }
