@@ -1,6 +1,8 @@
 package com.example.natacion.vistas.home
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.Observable
@@ -138,6 +141,7 @@ class HomeFragment : Fragment() {
         })
 
         binding.btnBuscar.setOnClickListener {
+            context?.let { it1 -> hidekeyboard(it1) }
             if (binding.spTipo.selectedItem.toString() == "Titulo") {
                 val titulo = "%" + binding.txtBuscar.text.toString() + "%"
                 if (!titulo.isNullOrEmpty()) {
@@ -210,6 +214,12 @@ class HomeFragment : Fragment() {
 
 
         return binding.root
+    }
+    private fun hidekeyboard(context: Context){
+        val inputMethodManager = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view?.windowToken  , 0)
+
+
     }
 
 }

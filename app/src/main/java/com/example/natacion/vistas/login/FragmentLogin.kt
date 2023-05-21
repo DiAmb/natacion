@@ -1,11 +1,17 @@
 package com.example.natacion.vistas.login
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -42,6 +48,7 @@ class FragmentLogin : Fragment() {
         binding.btnAcceder.setOnClickListener {
             var email: String = binding.txtCorreo.text.toString()
             var password: String = binding.txtPassword.text.toString()
+            context?.let { it1 -> hidekeyboard(it1) }
             if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
                 loginViewModel.accederUsuario(email, password)
             } else {
@@ -90,5 +97,12 @@ class FragmentLogin : Fragment() {
     private fun goToHome() {
         NavHostFragment.findNavController(this).navigate(R.id.action_fragmentLogin_to_homeFragment)
     }
+    private fun hidekeyboard(context: Context){
+        val inputMethodManager = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view?.windowToken  , 0)
+
+
+    }
+
 
 }

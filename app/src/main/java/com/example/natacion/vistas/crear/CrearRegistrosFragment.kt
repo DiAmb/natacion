@@ -1,6 +1,7 @@
 package com.example.natacion.vistas.crear
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
@@ -56,6 +58,7 @@ class CrearRegistrosFragment : Fragment() {
         binding.topAppBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.btnMenuGuardar -> {
+                    context?.let { it1 -> hidekeyboard(it1) }
                     val registro = Registro(
                         0,
                         binding.editNumero.text.toString().toInt(),
@@ -76,50 +79,7 @@ class CrearRegistrosFragment : Fragment() {
             }
         }
 
-        /*binding.btnRegresar.setOnClickListener {
 
-
-        }*/
-
-//        binding.btnMusica.setOnClickListener {
-//            val intent = Intent(Intent.ACTION_GET_CONTENT)
-//            intent.type = "audio/*"
-//            startActivityForResult(intent, 1)
-//        }
-//        TiempoReproducidoAudio = binding.timeCurrent
-//        TiempoRestanteAudio = binding.timeLeft
-//        mediaPlayer = MediaPlayer()
-//        binding.progresoAudio.max = 0
-//        binding.progresoAudio.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
-//            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
-//            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-//            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-//                mediaPlayer.seekTo(seekBar?.progress ?: 0)
-//            }
-//        })
-//        binding.btnPlay.setOnClickListener {
-//            togglePlayback()
-//        }
-//        binding.btnSeleccionar.setOnClickListener {
-//            val intent = Intent(Intent.ACTION_GET_CONTENT)
-//            intent.type = "image/*"
-//            startActivityForResult(intent, REQUEST_IMAGE)
-//        }
-/*
-        binding.btnGuardar.setOnClickListener {
-            val registro = Registro(
-                0,
-                binding.editNumero.text.toString().toInt(),
-                binding.editTitulo.text.toString(),
-                binding.editSubtitulo.text.toString(),
-                binding.editDescripcion.text.toString(),
-                binding.editImagen.text.toString(),
-                binding.editAudio.text.toString()
-            )
-            crearRegistrosViewModel.insertRegistro(
-                registro
-            )
-        }*/
 
         crearRegistrosViewModel.backHome.observe(viewLifecycleOwner, Observer {
             if (it) {
@@ -138,118 +98,11 @@ class CrearRegistrosFragment : Fragment() {
 
         return binding.root
     }
+    private fun hidekeyboard(context: Context){
+        val inputMethodManager = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view?.windowToken  , 0)
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-//            val audioUri = data?.data
-//            if (audioUri != null) {
-//                try {
-//                    if (mediaPlayer.isPlaying) {
-//                        mediaPlayer.stop()
-//                    }
-//                    // Código para la API
-//                    mediaPlayer.reset()
-//                    mediaPlayer.setDataSource(
-//                        requireContext(),
-//                        audioUri
-//                    ) // Configurar la fuente de audio en el objeto MediaPlayer
-//                    mediaPlayer.prepareAsync()
-//                    mediaPlayer.setOnPreparedListener {
-//                        mediaPlayer.start()
-//                        binding.btnPlay.visibility = View.VISIBLE
-//                        binding.progresoAudio.max = mediaPlayer.duration
-//                        setupSeekBar()
-//                    }
-//                    binding.btnPlay.setBackgroundResource(R.drawable.ic_pause)
-//                } catch (e: IOException) {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Error al establecer la fuente de audio",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                } catch (e: IllegalStateException) {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "El reproductor multimedia no se encuentra en el estado adecuado",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                } catch (e: SecurityException) {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Permiso denegado para acceder a la fuente de audio",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                } catch (e: IllegalArgumentException) {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Argumento ilegal pasado al reproductor multimedia",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            }
-//
-//        } else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
-//
-//            val imageUri = data?.data
-//            if (imageUri != null) {
-//                try {
-//                    binding.mostrarImagen.setImageURI(imageUri)
-//                    // Código para la API
-//                } catch (e: IOException) {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Error al establecer la fuente de imagen",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            }
-//        }
-//    }
-//
-//
-//    private fun setupSeekBar() {
-//        val handler = Handler()
-//        handler.postDelayed(object : Runnable {
-//            override fun run() {
-//                try {
-//                    val tiempoReproducido = mediaPlayer.currentPosition / 1000
-//                    val tiempoRestante = (mediaPlayer.duration - mediaPlayer.currentPosition) / 1000
-//                    val tiempoReproducidoStr =
-//                        String.format("%02d:%02d", tiempoReproducido / 60, tiempoReproducido % 60)
-//                    val tiempoRestanteStr =
-//                        String.format("%02d:%02d", tiempoRestante / 60, tiempoRestante % 60)
-//                    TiempoReproducidoAudio.text = tiempoReproducidoStr
-//                    TiempoRestanteAudio.text = tiempoRestanteStr
-//                    binding.progresoAudio.progress = mediaPlayer.currentPosition
-//
-//                    handler.postDelayed(this, 1000)
-//                } catch (e: IllegalStateException) {
-//                    handler.removeCallbacks(this)
-//                }
-//            }
-//        }, 0)
-//    }
-//
-//
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        mediaPlayer.release()
-//    }
-//
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        mediaPlayer?.stop()
-//    }
-//
-//
-//    private fun togglePlayback() {
-//        if (mediaPlayer.isPlaying) {
-//            binding.btnPlay.setBackgroundResource(R.drawable.ic_play)
-//            mediaPlayer.pause()
-//        } else {
-//            mediaPlayer.start()
-//            binding.btnPlay.setBackgroundResource(R.drawable.ic_pause)
-//        }
-//    }
+
+    }
+
 }

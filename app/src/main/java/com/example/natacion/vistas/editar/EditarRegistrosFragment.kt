@@ -1,10 +1,13 @@
 package com.example.natacion.vistas.editar
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -56,6 +59,7 @@ class EditarRegistrosFragment : Fragment() {
         binding.topAppBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.btnMenuGuardar -> {
+                    context?.let { it1 -> hidekeyboard(it1) }
                     val registro = Registro(
                         id,
                         binding.editNumero.text.toString().toInt(),
@@ -101,6 +105,12 @@ class EditarRegistrosFragment : Fragment() {
 
 
         return binding.root
+    }
+    private fun hidekeyboard(context: Context){
+        val inputMethodManager = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view?.windowToken  , 0)
+
+
     }
 
 }

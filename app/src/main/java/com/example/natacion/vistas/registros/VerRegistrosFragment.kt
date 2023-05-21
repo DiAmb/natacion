@@ -82,12 +82,12 @@ class VerRegistrosFragment : Fragment() {
                     ) // Configurar la fuente de audio en el objeto MediaPlayer
                     mediaPlayer.prepareAsync()
                     mediaPlayer.setOnPreparedListener {
-                        mediaPlayer.start()
+
                         binding.btnPlay.visibility = View.VISIBLE
                         binding.progresoAudio.max = mediaPlayer.duration
                         setupSeekBar()
                     }
-                    binding.btnPlay.setBackgroundResource(R.drawable.ic_pause)
+                    binding.btnPlay.setBackgroundResource(R.drawable.ic_play)
                 } catch (e: IOException) {
                     Toast.makeText(
                         requireContext(),
@@ -100,72 +100,6 @@ class VerRegistrosFragment : Fragment() {
             }
         }
         binding.btnPlay.setOnClickListener {
-//            if(!audio.isNullOrEmpty()){
-//                if(mediaPlayer.isPlaying){
-//                    mediaPlayer.stop()
-//                    mediaPlayer.reset()
-//                    mediaPlayer.release()
-//                    binding.btnPlay.setBackgroundResource(R.drawable.ic_play)
-//                }else{
-//                    playAudio(audio)
-//                    binding.btnPlay.setBackgroundResource(R.drawable.ic_pause)
-//                }
-//
-//
-//            }else{
-//                Toast.makeText(this.context, "Direccion url invalida", Toast.LENGTH_SHORT).show()
-//            }
-
-            //--------
-
-            //----
-
-//            val audioUri = data?.data
-//            if (audioUri != null) {
-//                try {
-//                    if (mediaPlayer.isPlaying) {
-//                        mediaPlayer.stop()
-//                    }
-//                    // Código para la API
-//                    mediaPlayer.reset()
-//                    mediaPlayer.setDataSource(
-//                        requireContext(),
-//                        audioUri
-//                    ) // Configurar la fuente de audio en el objeto MediaPlayer
-//                    mediaPlayer.prepareAsync()
-//                    mediaPlayer.setOnPreparedListener {
-//                        mediaPlayer.start()
-//                        binding.btnPlay.visibility = View.VISIBLE
-//                        binding.progresoAudio.max = mediaPlayer.duration
-//                        setupSeekBar()
-//                    }
-//                    binding.btnPlay.setBackgroundResource(R.drawable.ic_pause)
-//                } catch (e: IOException) {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Error al establecer la fuente de audio",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                } catch (e: IllegalStateException) {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "El reproductor multimedia no se encuentra en el estado adecuado",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                } catch (e: SecurityException) {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Permiso denegado para acceder a la fuente de audio",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                } catch (e: IllegalArgumentException) {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "Argumento ilegal pasado al reproductor multimedia",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            }
             togglePlayback()
 
 
