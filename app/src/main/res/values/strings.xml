@@ -9,6 +9,7 @@
     <string name="acceder">Acceder</string>
     <string name="buscar">Buscar</string>
     <string name="titulo_registro">%d. %s</string>
+    <string name="cargando">Cargando...</string>
 
 
     <string name="password">Ingresa tu contraseña:</string>

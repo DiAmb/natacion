@@ -22,21 +22,33 @@ class VerRegistrosViewModel(dataSource: DataDao, application: Application) :
     private val _completeDelete = MutableLiveData<Boolean>()
     val completeDelete: LiveData<Boolean> get() = _completeDelete
 
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> get() = _loading
+
     init {
+        _loading.value = false
         getDataUsuario()
     }
 
+    fun changeState() {
+        _loading.value = !_loading.value!!
+    }
+
     fun getDataUsuario() {
+        changeState()
         viewModelScope.launch {
             _usuarioLogged.value = getUsuarioDataBase()
+            changeState()
         }
     }
 
     fun deleteRegistro(id: Int) {
+        changeState()
         viewModelScope.launch {
             val registroNuevo = RegistroNetwork.registros.deleteRegistro(id)
             if (registroNuevo != null) {
                 Log.d("AAAAAAAAAAAAAAA", registroNuevo.toString())
+                changeState()
                 _completeDelete.value = true
             }
         }

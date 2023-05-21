@@ -127,6 +127,14 @@ class CrearRegistrosFragment : Fragment() {
             }
         })
 
+        crearRegistrosViewModel.loading.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.loadBlock.visibility = View.VISIBLE
+            } else {
+                binding.loadBlock.visibility = View.INVISIBLE
+            }
+        })
+
 
         return binding.root
     }

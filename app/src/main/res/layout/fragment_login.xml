@@ -84,9 +84,7 @@
             android:inputType="textPassword"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/lblPassword"
-            app:layout_constraintTop_toBottomOf="@+id/lblPassword"
-
-            tools:layout_editor_absoluteY="315dp" />
+            app:layout_constraintTop_toBottomOf="@+id/lblPassword" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -120,6 +118,43 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btnRegistrar"
                 app:layout_constraintTop_toTopOf="@+id/btnRegistrar" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/loadBlock"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#70393939"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:id="@+id/load"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:indeterminateTint="@color/md_theme_light_onPrimary"
+                android:indeterminateTintMode="src_in"
+                android:minWidth="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_black"
+                android:text="@string/cargando"
+                android:textColor="@color/md_theme_light_onPrimary"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/load" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

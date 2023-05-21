@@ -23,6 +23,9 @@ class HomeViewModel(dataSource: DataDao, application: Application) :
 
     private val registrosRepository = DataRepository(dataSource)
 
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> get() = _loading
+
     val database = dataSource
 
     private val _registros = MutableLiveData<List<Registro>?>()
@@ -36,15 +39,22 @@ class HomeViewModel(dataSource: DataDao, application: Application) :
 
 
     init {
+        _loading.value = false
         getRegistros()
         getDataUsuario()
         _logOutSuccess.value = false
     }
 
+    fun changeState() {
+        _loading.value = !_loading.value!!
+    }
+
     fun getRegistros() {
+        changeState()
         viewModelScope.launch {
             registrosRepository.refreshRegistros()
             _registros.value = getRegistrosFromDatabase()
+            changeState()
         }
     }
 

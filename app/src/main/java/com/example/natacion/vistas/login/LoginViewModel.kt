@@ -25,13 +25,22 @@ class LoginViewModel(dataSource: DataDao, application: Application) :
     private val _loginSucess = MutableLiveData<Int>()
     val loginSucess: LiveData<Int> get() = _loginSucess
 
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> get() = _loading
+
     private val database = dataSource
 
     init {
+        _loading.value = false
         _loginSucess.value = -100
     }
 
+    fun changeState() {
+        _loading.value = !_loading.value!!
+    }
+
     fun accederUsuario(email: String, password: String) {
+        changeState()
         viewModelScope.launch {
             val usuarioResponse =
                 RegistroNetwork.registros.loginUsuario(Usuario(email, password)).body()
@@ -60,6 +69,7 @@ class LoginViewModel(dataSource: DataDao, application: Application) :
             } else {
                 _loginSucess.value = -1
             }
+            changeState()
         }
     }
 

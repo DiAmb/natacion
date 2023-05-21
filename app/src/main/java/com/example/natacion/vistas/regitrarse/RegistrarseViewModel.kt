@@ -19,13 +19,22 @@ class RegistrarseViewModel(dataSource: DataDao, application: Application) :
     private val _sendFailed = MutableLiveData<Boolean>()
     val sendFailed: LiveData<Boolean> get() = _sendFailed
 
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> get() = _loading
+
 
     init {
+        _loading.value = false
         _sendFailed.value = false
         _sendSuccess.value = false
     }
 
+    fun changeState() {
+        _loading.value = !_loading.value!!
+    }
+
     fun registrarUsuario(email: String, password: String, nombres: String, apellidos: String) {
+        changeState()
         viewModelScope.launch {
             val usuario =
                 RegistroNetwork.registros.registrarUsuario(
@@ -42,6 +51,7 @@ class RegistrarseViewModel(dataSource: DataDao, application: Application) :
             } else {
                 _sendFailed.value = true
             }
+            changeState()
         }
     }
 }
