@@ -27,5 +27,47 @@
         <item name="colorOnSurfaceInverse">@color/md_theme_dark_inverseOnSurface</item>
         <item name="colorSurfaceInverse">@color/md_theme_dark_inverseSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
+
+
+
+        <item name="android:textColorSecondary">@color/md_theme_dark_onSurface</item>
+        <item name="android:textColorTertiary">@color/md_theme_dark_onSurface</item>
+        <item name="android:textColorHint">@color/md_theme_dark_onSurface</item>
+
+
+
+
+
+        <item name="android:textColor">@color/md_theme_dark_onSurface</item> <!-- Color de texto blanco -->
+
+
+
+        <item name="android:textColorPrimary">@color/md_theme_dark_onSurface</item>
+
+       <item name="colorAccent">@color/md_theme_dark_onSurface</item>
+        <item name="colorControlNormal">@color/md_theme_dark_onSurface</item>
+
+        <item name="hintTextColor">@color/md_theme_dark_onSurface</item>
+       <item name="android:buttonTint">@color/md_theme_dark_onSurface</item> <!-- Tinte del botón blanco -->
+        <item name="android:textColorHighlight">@color/md_theme_dark_onSurface</item> <!-- Color de resaltado de texto blanco -->
+        <item name="android:textColorLink">@color/md_theme_dark_onSurface</item> <!-- Color de enlace de texto blanco -->
+        <item name="colorControlActivated">@color/md_theme_dark_onSurface</item> <!-- Color de control activado blanco -->
+        <item name="colorControlHighlight">@color/md_theme_dark_onSurface</item> <!-- Color de resaltado de control blanco -->
+        <item name="colorButtonNormal">@color/md_theme_dark_onSurface</item> <!-- Color de botón normal blanco -->
+
+        <item name="android:colorAccent">@color/md_theme_dark_onSurface</item> <!-- Color de acento blanco -->
+        <item name="android:colorButtonNormal">@color/md_theme_dark_onSurface</item> <!-- Color de botón normal blanco -->
+        <item name="android:textColorAlertDialogListItem">@color/md_theme_dark_onSurface</item> <!-- Color de texto en diálogos de lista blanco -->
+
+        <item name="android:textColorHighlightInverse">@color/md_theme_dark_onSurface</item> <!-- Color de resaltado de texto inverso blanco -->
+        <item name="android:textColorLinkInverse">@color/md_theme_dark_onSurface</item> <!-- Color de enlace de texto inverso blanco -->
+        <item name="android:textColorPrimaryInverse">@color/md_theme_dark_onSurface</item> <!-- Color de texto primario inverso blanco -->
+        <item name="android:textColorSecondaryInverse">@color/md_theme_dark_onSurface</item> <!-- Color de texto secundario inverso blanco -->
+        <item name="android:textColorTertiaryInverse">@color/md_theme_dark_onSurface</item> <!-- Color de texto terciario inverso blanco -->
+
+        <item name="android:textAppearanceInverse">@style/TextAppearance.AppCompat</item> <!-- Apariencia de texto inverso blanco -->
+        <item name="android:textColorPrimaryInverseNoDisable">@color/md_theme_dark_onSurface</item> <!-- Color de texto primario inverso blanco sin deshabilitar -->
+        <item name="android:textColorSecondaryInverseNoDisable">@color/md_theme_dark_onSurface</item>
+
     </style>
 </resources>

@@ -17,6 +17,7 @@
 
     <com.google.android.material.card.MaterialCardView
         style="?attr/materialCardViewElevatedStyle"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small_padding"
@@ -67,6 +68,7 @@
 
                 <RadioButton
                     android:id="@+id/rbSinAccesso"
+                    style="@style/RadioButtonTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
                     android:checked="true"
@@ -74,18 +76,21 @@
 
                 <RadioButton
                     android:id="@+id/rbLector"
+                    style="@style/RadioButtonTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
                     android:text="@string/lector" />
 
                 <RadioButton
                     android:id="@+id/rbEditor"
+                    style="@style/RadioButtonTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
                     android:text="@string/editor" />
 
                 <RadioButton
                     android:id="@+id/rbAdministrador"
+                    style="@style/RadioButtonTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
                     android:text="@string/admin" />
