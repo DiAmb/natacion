@@ -65,6 +65,7 @@ class CrearRegistrosFragment : Fragment() {
                         binding.editTitulo.text.toString(),
                         binding.editSubtitulo.text.toString(),
                         binding.editDescripcion.text.toString(),
+                        binding.editDescripcionDos.text.toString(),
                         binding.editImagen.text.toString(),
                         binding.editAudio.text.toString()
                     )

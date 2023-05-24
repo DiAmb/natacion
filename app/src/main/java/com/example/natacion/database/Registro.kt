@@ -25,6 +25,9 @@ data class Registro(
     @ColumnInfo(name = "descripcion")
     var descripcion: String,
 
+    @ColumnInfo(name = "descripciondos")
+    var descripciondos: String,
+
     @ColumnInfo(name = "imagen")
     var imagen: String,
 

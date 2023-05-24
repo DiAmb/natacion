@@ -7,6 +7,8 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
@@ -55,6 +57,7 @@ class VerRegistrosFragment : Fragment() {
         var titulo = arguments?.getString("titulo")
         var subtitulo = arguments?.getString("subtitulo")
         var descripcion = arguments?.getString("descripcion")
+        var descripciondos = arguments?.getString("descripciondos")
         var imagen = arguments?.getString("imagen")
         var audio = arguments?.getString("audio")
         mediaPlayer = MediaPlayer()
@@ -64,6 +67,7 @@ class VerRegistrosFragment : Fragment() {
         binding.txtTitulo.text = numero.toString() + " " + titulo
         binding.txtSubtitulo.text = subtitulo
         binding.txtDescripcion.text = descripcion
+        binding.txtDescripcionDos.text = descripciondos
         TiempoReproducidoAudio = binding.timeCurrent
         TiempoRestanteAudio = binding.timeLeft
         binding.topAppBar.title = numero.toString() + " " + titulo
@@ -138,6 +142,7 @@ class VerRegistrosFragment : Fragment() {
                     bundle.putString("titulo", titulo)
                     bundle.putString("subtitulo", subtitulo)
                     bundle.putString("descripcion", descripcion)
+                    bundle.putString("descripciondos", descripciondos)
                     bundle.putString("imagen", imagen)
                     bundle.putString("audio", audio)
                     NavHostFragment.findNavController(this)
@@ -178,6 +183,55 @@ class VerRegistrosFragment : Fragment() {
             }
         }
 
+        binding.swDescripcion.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                val fadeOutAnimation = AlphaAnimation(1.0f, 0.0f)
+                fadeOutAnimation.duration = 200 // Duración de la animación en milisegundos
+                binding.txtDescripcionDos.startAnimation(fadeOutAnimation)
+
+                fadeOutAnimation.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationStart(animation: Animation) {}
+
+                    override fun onAnimationEnd(animation: Animation) {
+                        binding.txtDescripcionDos.visibility = View.GONE
+                        binding.txtDescripcion.visibility = View.VISIBLE
+
+                        // Animación de fade-in (aparición gradual) en txtDescripcion
+                        val fadeInAnimation = AlphaAnimation(0.0f, 1.0f)
+                        fadeInAnimation.duration = 500 // Duración de la animación en milisegundos
+                        binding.txtDescripcion.startAnimation(fadeInAnimation)
+                    }
+
+                    override fun onAnimationRepeat(animation: Animation) {}
+                })
+
+                Toast.makeText(context, "Mostrando el cifrado", Toast.LENGTH_SHORT).show()
+            } else {
+
+                val fadeOutAnimation = AlphaAnimation(1.0f, 0.0f)
+                fadeOutAnimation.duration = 200 // Duración de la animación en milisegundos
+                binding.txtDescripcion.startAnimation(fadeOutAnimation)
+
+                fadeOutAnimation.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationStart(animation: Animation) {}
+
+                    override fun onAnimationEnd(animation: Animation) {
+                        binding.txtDescripcion.visibility = View.GONE
+                        binding.txtDescripcionDos.visibility = View.VISIBLE
+
+                        // Animación de fade-in (aparición gradual) en txtDescripcionDos
+                        val fadeInAnimation = AlphaAnimation(0.0f, 1.0f)
+                        fadeInAnimation.duration = 500 // Duración de la animación en milisegundos
+                        binding.txtDescripcionDos.startAnimation(fadeInAnimation)
+                    }
+
+                    override fun onAnimationRepeat(animation: Animation) {}
+                })
+
+                Toast.makeText(context, "Ocultando el cifrado", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         verRegistrosViewModel.usuarioLogged.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 when (it.tipo) {
@@ -207,6 +261,8 @@ class VerRegistrosFragment : Fragment() {
                 binding.loadBlock.visibility = View.INVISIBLE
             }
         })
+
+
 
 
         return binding.root

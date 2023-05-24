@@ -40,6 +40,7 @@ class EditarRegistrosFragment : Fragment() {
         var numero = arguments?.getInt("numero")
         var titulo = arguments?.getString("titulo")
         var descripcion = arguments?.getString("descripcion")
+        var descripciondos = arguments?.getString("descripciondos")
         var subtitulo = arguments?.getString("subtitulo")
         var imagen = arguments?.getString("imagen")
         var audio = arguments?.getString("audio")
@@ -47,6 +48,7 @@ class EditarRegistrosFragment : Fragment() {
 
         binding.editTitulo.setText(titulo)
         binding.editDescripcion.setText(descripcion)
+        binding.editDescripcionDos.setText(descripciondos)
         binding.editAudio.setText(audio)
         binding.editImagen.setText(imagen)
         binding.editSubtitulo.setText(subtitulo)
@@ -66,6 +68,7 @@ class EditarRegistrosFragment : Fragment() {
                         binding.editTitulo.text.toString(),
                         binding.editSubtitulo.text.toString(),
                         binding.editDescripcion.text.toString(),
+                        binding.editDescripcionDos.text.toString(),
                         binding.editImagen.text.toString(),
                         binding.editAudio.text.toString()
                     )
@@ -88,6 +91,7 @@ class EditarRegistrosFragment : Fragment() {
                 bundle.putString("titulo", binding.editTitulo.text.toString())
                 bundle.putString("subtitulo", binding.editSubtitulo.text.toString())
                 bundle.putString("descripcion", binding.editDescripcion.text.toString())
+                bundle.putString("descripciondos", binding.editDescripcionDos.text.toString())
                 bundle.putString("imagen", binding.editImagen.text.toString())
                 bundle.putString("audio", binding.editAudio.text.toString())
                 NavHostFragment.findNavController(this)

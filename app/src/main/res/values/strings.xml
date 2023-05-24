@@ -22,6 +22,7 @@
     <string name="descripcion">Descripcion</string>
     <string name="titulo">Titulo</string>
     <string name="descripcion1">Descripcion</string>
+    <string name="descripcion2">Descripcion (Sin Cifrado)</string>
     <string name="himno">Himno #</string>
     <string name="contenido">aa\naa\naa\naa\naa\naa\naa\n aa\naa\naa\naa\naa\naa\naa\naa\naa\naa\naa</string>
     <string name="numero_de_himno">Número de Himno</string>

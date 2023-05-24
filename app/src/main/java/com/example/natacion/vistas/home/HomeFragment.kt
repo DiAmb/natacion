@@ -60,6 +60,7 @@ class HomeFragment : Fragment() {
             bundle.putString("titulo", registro.titulo)
             bundle.putString("subtitulo", registro.subtitulo)
             bundle.putString("descripcion", registro.descripcion)
+            bundle.putString("descripciondos", registro.descripciondos)
             bundle.putString("imagen", registro.imagen)
             bundle.putString("audio", registro.audio)
             NavHostFragment.findNavController(this)
