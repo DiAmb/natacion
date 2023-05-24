@@ -18,16 +18,17 @@
         <item name="android:textColor">?attr/colorOnSecondaryContainer</item>
     </style>
     <!-- Archivo: res/values-night/styles.xml -->
-    <style name="RadioButtonTheme" >
+    <style name="RadioButtonTheme">
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">?attr/colorOnSecondaryContainer</item>
-
-
     </style>
 
-
-
+    <style name="SwitchCompat">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/colorOnSecondaryContainer</item>
+    </style>
 
 
 </resources>
