@@ -4,7 +4,7 @@
     <string name="usuarios">Gestión de usuarios</string>
     <string name="editando">Editando registro</string>
     <string name="correoHint">Escribe tu correo</string>
-    <string name="passHint">Escribe tu constraseña</string>
+    <string name="passHint">Escribe tu contraseña</string>
     <string name="correo">Ingresa tu correo:</string>
     <string name="registrar">Registrarse</string>
     <string name="acceder">Acceder</string>
@@ -39,7 +39,7 @@
 
     <!--  Registro de usuario  -->
     <string name="txtCorreoRegistro">Correo Electrónico*</string>
-    <string name="txtPasswordRegistro">Constraseña*</string>
+    <string name="txtPasswordRegistro">Contraseña*</string>
     <string name="txtNombreRegistro">Nombres*</string>
     <string name="txtApellidoRegistro">Apellidos*</string>
 
